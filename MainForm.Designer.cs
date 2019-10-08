@@ -33,13 +33,13 @@
             this.NumberofElements = new System.Windows.Forms.Label();
             this.SortingSpeed = new System.Windows.Forms.Label();
             this.EnterSortingSpeed = new System.Windows.Forms.TextBox();
-            this.EnterNumberofElements = new System.Windows.Forms.TextBox();
+            this.ChooseNumberofElements = new System.Windows.Forms.TextBox();
             this.SortingTime = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.SelectAlgorithm = new System.Windows.Forms.ComboBox();
             this.BarChartBox = new System.Windows.Forms.PictureBox();
             this.chartTimer = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.Shuffle = new System.Windows.Forms.Button();
+            this.Sort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BarChartBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,6 +60,7 @@
             this.NumberofElements.Size = new System.Drawing.Size(140, 17);
             this.NumberofElements.TabIndex = 1;
             this.NumberofElements.Text = "Number of Elements:";
+            this.NumberofElements.Click += new System.EventHandler(this.NumberofElements_Click);
             // 
             // SortingSpeed
             // 
@@ -77,14 +78,15 @@
             this.EnterSortingSpeed.Name = "EnterSortingSpeed";
             this.EnterSortingSpeed.Size = new System.Drawing.Size(50, 22);
             this.EnterSortingSpeed.TabIndex = 3;
+            this.EnterSortingSpeed.TextChanged += new System.EventHandler(this.EnterSortingSpeed_TextChanged);
             // 
-            // EnterNumberofElements
+            // ChooseNumberofElements
             // 
-            this.EnterNumberofElements.Location = new System.Drawing.Point(176, 56);
-            this.EnterNumberofElements.Name = "EnterNumberofElements";
-            this.EnterNumberofElements.Size = new System.Drawing.Size(50, 22);
-            this.EnterNumberofElements.TabIndex = 4;
-            this.EnterNumberofElements.TextChanged += new System.EventHandler(this.TextBox2_TextChanged);
+            this.ChooseNumberofElements.Location = new System.Drawing.Point(176, 56);
+            this.ChooseNumberofElements.Name = "ChooseNumberofElements";
+            this.ChooseNumberofElements.Size = new System.Drawing.Size(50, 22);
+            this.ChooseNumberofElements.TabIndex = 4;
+            this.ChooseNumberofElements.TextChanged += new System.EventHandler(this.ChooseNumberofElements_TextChanged);
             // 
             // SortingTime
             // 
@@ -95,18 +97,19 @@
             this.SortingTime.TabIndex = 0;
             this.SortingTime.Text = "Time (O):";
             // 
-            // comboBox1
+            // SelectAlgorithm
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.SelectAlgorithm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SelectAlgorithm.FormattingEnabled = true;
+            this.SelectAlgorithm.Items.AddRange(new object[] {
             "Bubble Sort",
-            "Selection Sort",
-            "Insertion Sort"});
-            this.comboBox1.Location = new System.Drawing.Point(176, 132);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(140, 24);
-            this.comboBox1.TabIndex = 5;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            "Insertion Sort",
+            "Selection Sort"});
+            this.SelectAlgorithm.Location = new System.Drawing.Point(176, 132);
+            this.SelectAlgorithm.Name = "SelectAlgorithm";
+            this.SelectAlgorithm.Size = new System.Drawing.Size(140, 24);
+            this.SelectAlgorithm.TabIndex = 5;
+            this.SelectAlgorithm.SelectedIndexChanged += new System.EventHandler(this.SelectAlgorithm_SelectedIndexChanged);
             // 
             // BarChartBox
             // 
@@ -121,35 +124,35 @@
             // 
             this.chartTimer.Enabled = true;
             // 
-            // button1
+            // Shuffle
             // 
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.Shuffle.Location = new System.Drawing.Point(176, 186);
+            this.Shuffle.Name = "Shuffle";
+            this.Shuffle.Size = new System.Drawing.Size(100, 40);
+            this.Shuffle.TabIndex = 8;
+            this.Shuffle.Text = "Shuffle";
+            this.Shuffle.UseVisualStyleBackColor = true;
+            this.Shuffle.Click += new System.EventHandler(this.Shuffle_Click);
             // 
-            // button2
+            // Sort
             // 
-            this.button2.Location = new System.Drawing.Point(62, 230);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(190, 42);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            this.Sort.Location = new System.Drawing.Point(70, 186);
+            this.Sort.Name = "Sort";
+            this.Sort.Size = new System.Drawing.Size(100, 40);
+            this.Sort.TabIndex = 9;
+            this.Sort.Text = "Sort!";
+            this.Sort.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1382, 653);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Sort);
+            this.Controls.Add(this.Shuffle);
             this.Controls.Add(this.BarChartBox);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.EnterNumberofElements);
+            this.Controls.Add(this.SelectAlgorithm);
+            this.Controls.Add(this.ChooseNumberofElements);
             this.Controls.Add(this.EnterSortingSpeed);
             this.Controls.Add(this.SortingSpeed);
             this.Controls.Add(this.NumberofElements);
@@ -171,13 +174,13 @@
         private System.Windows.Forms.Label NumberofElements;
         private System.Windows.Forms.Label SortingSpeed;
         private System.Windows.Forms.TextBox EnterSortingSpeed;
-        private System.Windows.Forms.TextBox EnterNumberofElements;
+        private System.Windows.Forms.TextBox ChooseNumberofElements;
         private System.Windows.Forms.Label SortingTime;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox SelectAlgorithm;
         private System.Windows.Forms.PictureBox BarChartBox;
         private System.Windows.Forms.Timer chartTimer;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Shuffle;
+        private System.Windows.Forms.Button Sort;
     }
 }
 

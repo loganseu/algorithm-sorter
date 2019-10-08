@@ -18,15 +18,17 @@ namespace SeeSortingAlgorithms
         public MainForm()
         {
             InitializeComponent();
+            SelectAlgorithm.SelectedIndex = 0;
+
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
         }
 
-        private void TextBox2_TextChanged(object sender, EventArgs e)
+        private void ChooseNumberofElements_TextChanged(object sender, EventArgs e)
         {
-
+            string NumberofElements = ChooseNumberofElements.Text;
         }
 
         private void SortingSpeed_Click(object sender, EventArgs e)
@@ -67,8 +69,7 @@ namespace SeeSortingAlgorithms
                         SwapValues(numbers, i, j);
                         RedrawItem(i, numbers, Brushes.Red);
                         RedrawItem(j, numbers, Brushes.Green);
-                        BarChartBox.Invalidate();
-                        BarChartBox.Update();
+                        BarChartBox.Refresh();
                         RedrawItem(i, numbers, Brushes.White);
                         RedrawItem(j, numbers, Brushes.White);
                     }
@@ -88,12 +89,14 @@ namespace SeeSortingAlgorithms
             g.FillRectangle(color, x, boxHeight - y, offsetX, boxHeight);
         }
 
-        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void SelectAlgorithm_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void Shuffle_Click(object sender, EventArgs e)
         {
             bmp = new Bitmap(BarChartBox.Width, BarChartBox.Height);
             g = Graphics.FromImage(bmp);
@@ -114,7 +117,16 @@ namespace SeeSortingAlgorithms
                 SwapValues(numbers, rnd, i);
             }
             DrawBarChart(numbers);
-            BubbleSort(numbers);
+        }
+
+        private void NumberofElements_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EnterSortingSpeed_TextChanged(object sender, EventArgs e)
+        {
+            var SortingSpeed = EnterSortingSpeed.Text;
         }
     }
 }
