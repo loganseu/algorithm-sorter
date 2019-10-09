@@ -20,13 +20,13 @@ namespace SeeSortingAlgorithms
 
     //public static SortingTime currentSortingTime { get; set; }
 
-    public BarChart(PictureBox p, int speed, int numberOfBars)
+    public BarChart(PictureBox p, int speed, int elements)
         {
             bmp = new Bitmap(p.Width, p.Height);
             g = Graphics.FromImage(bmp);
             BarChartBox = p;
             sortingSpeed = speed;
-            numberOfElements = numberOfBars;
+            numberOfElements = elements;
         }
 
         private void BubbleSort(List<int> numbers)
@@ -106,18 +106,6 @@ namespace SeeSortingAlgorithms
                 return numbers;
             }
             return numbers;
-        }
-
-        public enum SortingTime
-        {
-            [Description("O(1)")]
-            OTOTHE1,
-            [Description("O(N)")]
-            OTOTHEN,
-            [Description("O(Nlog(N))")]
-            ONLOGN,
-            [Description("O(N^2)")]
-            OTONSQUARED
         }
 
         public static string GetEnumDescription(Enum value)

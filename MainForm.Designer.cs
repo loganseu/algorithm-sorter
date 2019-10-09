@@ -31,7 +31,7 @@
             this.SelectedAlgorithm = new System.Windows.Forms.Label();
             this.NumberofElements = new System.Windows.Forms.Label();
             this.SortingSpeed = new System.Windows.Forms.Label();
-            this.SortingTime = new System.Windows.Forms.Label();
+            this.ONotationTime = new System.Windows.Forms.Label();
             this.SelectAlgorithm = new System.Windows.Forms.ComboBox();
             this.BarChartBox = new System.Windows.Forms.PictureBox();
             this.Shuffle = new System.Windows.Forms.Button();
@@ -73,14 +73,14 @@
             this.SortingSpeed.TabIndex = 2;
             this.SortingSpeed.Text = "Sorting Speed (ms)";
             // 
-            // SortingTime
+            // ONotationTime
             // 
-            this.SortingTime.AutoSize = true;
-            this.SortingTime.Location = new System.Drawing.Point(102, 27);
-            this.SortingTime.Name = "SortingTime";
-            this.SortingTime.Size = new System.Drawing.Size(68, 17);
-            this.SortingTime.TabIndex = 0;
-            this.SortingTime.Text = "Time (O):";
+            this.ONotationTime.AutoSize = true;
+            this.ONotationTime.Location = new System.Drawing.Point(102, 27);
+            this.ONotationTime.Name = "ONotationTime";
+            this.ONotationTime.Size = new System.Drawing.Size(68, 17);
+            this.ONotationTime.TabIndex = 0;
+            this.ONotationTime.Text = "Time (O):";
             // 
             // SelectAlgorithm
             // 
@@ -125,6 +125,7 @@
             this.Sort.TabIndex = 9;
             this.Sort.Text = "Sort!";
             this.Sort.UseVisualStyleBackColor = true;
+            this.Sort.Click += new System.EventHandler(this.Sort_Click);
             // 
             // ChangeNumberOfElements
             // 
@@ -216,7 +217,7 @@
             this.Controls.Add(this.SelectAlgorithm);
             this.Controls.Add(this.SortingSpeed);
             this.Controls.Add(this.NumberofElements);
-            this.Controls.Add(this.SortingTime);
+            this.Controls.Add(this.ONotationTime);
             this.Controls.Add(this.SelectedAlgorithm);
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(1400, 700);
@@ -236,7 +237,7 @@
         private System.Windows.Forms.Label SelectedAlgorithm;
         private System.Windows.Forms.Label NumberofElements;
         private System.Windows.Forms.Label SortingSpeed;
-        private System.Windows.Forms.Label SortingTime;
+        private System.Windows.Forms.Label ONotationTime;
         private System.Windows.Forms.ComboBox SelectAlgorithm;
         private System.Windows.Forms.PictureBox BarChartBox;
         private System.Windows.Forms.Button Shuffle;

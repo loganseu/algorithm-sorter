@@ -24,6 +24,18 @@ namespace SeeSortingAlgorithms
             InitializeComponent();
         }
 
+        public enum SortingTime
+        {
+            [Description("O(1)")]
+            OTOTHE1,
+            [Description("O(N)")]
+            OTOTHEN,
+            [Description("O(Nlog(N))")]
+            ONLOGN,
+            [Description("O(N^2)")]
+            OTONSQUARED
+        }
+
         public List<int> SwapValues(List<int> numbers, int a, int b)
         {
             int temp = numbers[b];
@@ -84,8 +96,13 @@ namespace SeeSortingAlgorithms
             numberOfElements = (int) AdjustElements.Value;
 
             GenerateList(numbers);
-            //ShuffleList(numbers);
+            ShuffleList(numbers);
             DrawBarChart(numbers);
+        }
+
+        private void Sort_Click(object sender, EventArgs e)
+        {
+            BarChart sortingAlgorithm = new BarChart(BarChartBox, speed, numberOfElements);
         }
     }
 }
