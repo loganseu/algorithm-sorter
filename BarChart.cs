@@ -14,22 +14,22 @@ namespace SeeSortingAlgorithms
     {
         Graphics g;
         Bitmap bmp;
-        public static List<int> numbers { get; set; }
-        public static int numberOfElements { get; set; }
+        public int numberOfElements { get; set; }
+        public int sortingSpeed { get; set; }
+        PictureBox BarChartBox;
+
     //public static SortingTime currentSortingTime { get; set; }
 
-    public BarChart(PictureBox p)
+    public BarChart(PictureBox p, int speed, int numberOfBars)
         {
-            numbers = new List<int>();
-            numberOfElements = 50;
-            GenerateList();
-            ShuffleList();
-
             bmp = new Bitmap(p.Width, p.Height);
             g = Graphics.FromImage(bmp);
+            BarChartBox = p;
+            sortingSpeed = speed;
+            numberOfElements = numberOfBars;
         }
 
-        public static List<int> BubbleSort()
+        private void BubbleSort(List<int> numbers)
         {
             for (int i = 0; i < numbers.Count - 1; ++i)
             {
@@ -38,13 +38,38 @@ namespace SeeSortingAlgorithms
                     if (numbers[i] > numbers[j])
                     {
                         SwapValues(numbers, i, j);
+                        RedrawItem(i, numbers, Brushes.Red);
+                        RedrawItem(j, numbers, Brushes.Green);
+                        BarChartBox.Refresh();
+                        RedrawItem(i, numbers, Brushes.White);
+                        RedrawItem(j, numbers, Brushes.White);
                     }
                 }
             }
-            return numbers;
-        } 
+        }
 
-        public static List<int> InsertionSort()
+        public static List<int> SwapValues(List<int> numbers, int a, int b)
+        {
+            int temp = numbers[b];
+            numbers[b] = numbers[a];
+            numbers[a] = temp;
+
+            return numbers;
+        }
+
+        private void RedrawItem(int index, List<int> numbers, Brush color)
+        {
+            int boxWidth = BarChartBox.Width;
+            int boxHeight = BarChartBox.Height;
+
+            int x = (int)(((double)boxWidth / numbers.Count) * index);
+            int y = (int)(((double)boxHeight / numbers.Count) * numbers[index]);
+            int offsetX = (int)Math.Round(((double)boxWidth / numbers.Count), 0);
+            g.FillRectangle(Brushes.Black, x, 0, offsetX, boxHeight);
+            g.FillRectangle(color, x, boxHeight - y, offsetX, boxHeight);
+        }
+
+        public static List<int> InsertionSort(List<int> numbers)
         {
             for (int i = 0; i < numbers.Count - 1; i++)
             {
@@ -62,7 +87,7 @@ namespace SeeSortingAlgorithms
             return numbers;
         }
 
-        public static List<int> SelectionSort()
+        public static List<int> SelectionSort(List<int> numbers)
         {
             int min = 0;
             int min_index = 0;
@@ -80,37 +105,6 @@ namespace SeeSortingAlgorithms
                 numbers[i] = min;
                 return numbers;
             }
-            return numbers;
-        }
-
-        public static List<int> GenerateList()
-        {
-            for (int i = 0; i < numberOfElements; ++i)
-            {
-                numbers.Add(i + 1);
-            }
-            return numbers;
-        }
-
-        public static List<int> ShuffleList()
-        {
-            Random shuffle = new Random();
-
-            for (int i = numbers.Count - 1; i > 1; i--)
-            {
-                int rnd = shuffle.Next(i + 1);
-
-                SwapValues(numbers, rnd, i);
-            }
-            return numbers;
-        }
-
-        public static List<int> SwapValues(List<int> numbers, int a, int b)
-        {
-            int temp = numbers[b];
-            numbers[b] = numbers[a];
-            numbers[a] = temp;
-
             return numbers;
         }
 

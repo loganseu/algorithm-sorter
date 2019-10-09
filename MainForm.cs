@@ -15,32 +15,43 @@ namespace SeeSortingAlgorithms
     {
         Graphics g;
         Bitmap bmp;
+        List<int> numbers;
+        public int numberOfElements { get; set; }
+        public int speed { get; set; }
+
         public MainForm()
         {
             InitializeComponent();
-            SelectAlgorithm.SelectedIndex = 0;
-
         }
 
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void ChooseNumberofElements_TextChanged(object sender, EventArgs e)
-        {
-            string NumberofElements = ChooseNumberofElements.Text;
-        }
-
-        private void SortingSpeed_Click(object sender, EventArgs e)
-        {
-
-        }
-        public static List<int> SwapValues(List<int> numbers, int a, int b)
+        public List<int> SwapValues(List<int> numbers, int a, int b)
         {
             int temp = numbers[b];
             numbers[b] = numbers[a];
             numbers[a] = temp;
 
+            return numbers;
+        }
+
+        public List<int> GenerateList(List<int> numbers)
+        {
+            for (int i = 0; i < numberOfElements; ++i)
+            {
+                numbers.Add(i + 1);
+            }
+            return numbers;
+        }
+
+        public List<int> ShuffleList(List<int> numbers)
+        {
+            Random shuffle = new Random();
+
+            for (int i = numbers.Count - 1; i > 1; i--)
+            {
+                int rnd = shuffle.Next(i + 1);
+
+                SwapValues(numbers, rnd, i);
+            }
             return numbers;
         }
 
@@ -58,39 +69,6 @@ namespace SeeSortingAlgorithms
             }
         }
 
-        private void BubbleSort(List<int> numbers)
-        {
-            for (int i = 0; i < numbers.Count - 1; ++i)
-            {
-                for (int j = i + 1; j < numbers.Count; ++j)
-                {
-                    if (numbers[i] > numbers[j])
-                    {
-                        SwapValues(numbers, i, j);
-                        RedrawItem(i, numbers, Brushes.Red);
-                        RedrawItem(j, numbers, Brushes.Green);
-                        BarChartBox.Refresh();
-                        RedrawItem(i, numbers, Brushes.White);
-                        RedrawItem(j, numbers, Brushes.White);
-                    }
-                }
-            }
-        }
-
-        private void RedrawItem(int index, List<int> numbers, Brush color)
-        {
-            int boxWidth = BarChartBox.Width;
-            int boxHeight = BarChartBox.Height;
-
-            int x = (int)(((double)boxWidth / numbers.Count) * index);
-            int y = (int)(((double)boxHeight / numbers.Count) * numbers[index]);
-            int offsetX = (int)Math.Round(((double)boxWidth / numbers.Count), 0);
-            g.FillRectangle(Brushes.Black, x, 0, offsetX, boxHeight);
-            g.FillRectangle(color, x, boxHeight - y, offsetX, boxHeight);
-        }
-
-
-
         private void SelectAlgorithm_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -100,33 +78,14 @@ namespace SeeSortingAlgorithms
         {
             bmp = new Bitmap(BarChartBox.Width, BarChartBox.Height);
             g = Graphics.FromImage(bmp);
-
             BarChartBox.Image = bmp;
 
-            List<int> numbers = new List<int>();
-            int numberOfElements = 20;
-            for (int i = 0; i < numberOfElements; ++i)
-            {
-                numbers.Add(i + 1);
-            }
-            Random shuffle = new Random();
-            for (int i = numbers.Count - 1; i > 1; i--)
-            {
-                int rnd = shuffle.Next(i + 1);
+            numbers = new List<int>();
+            numberOfElements = (int) AdjustElements.Value;
 
-                SwapValues(numbers, rnd, i);
-            }
+            GenerateList(numbers);
+            //ShuffleList(numbers);
             DrawBarChart(numbers);
-        }
-
-        private void NumberofElements_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void EnterSortingSpeed_TextChanged(object sender, EventArgs e)
-        {
-            var SortingSpeed = EnterSortingSpeed.Text;
         }
     }
 }
