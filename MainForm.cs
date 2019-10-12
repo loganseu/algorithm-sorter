@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 
@@ -22,8 +19,8 @@ namespace SeeSortingAlgorithms
         public MainForm()
         {
             InitializeComponent();
-            CreateNewBarChart();
-            SelectTheAlgorithm.SelectedIndex = 0;
+            SelectAlgorithm.SelectedIndex = 0;
+            CreateNewBarChart(false);
         }
 
         public enum SortingTime
@@ -63,7 +60,6 @@ namespace SeeSortingAlgorithms
             for (int i = numbers.Count - 1; i > 1; i--)
             {
                 int rnd = shuffle.Next(i + 1);
-
                 SwapValues(numbers, rnd, i);
             }
             return numbers;
@@ -73,17 +69,17 @@ namespace SeeSortingAlgorithms
         {
             int boxWidth = BarChartBox.Width;
             int boxHeight = BarChartBox.Height;
+            int offsetX = (int)Math.Ceiling(((double)boxWidth / numbers.Count));
 
             for (int i = 0; i < numbers.Count; ++i)
             {
-                int offsetX = (int)Math.Round(((double)boxWidth / numbers.Count), 0);
-                int x = (int)(((double)boxWidth / numbers.Count) * i);
+                int x = offsetX * i;
                 int y = (int)(((double)boxHeight / numbers.Count) * numbers[i]);
                 g.FillRectangle(Brushes.White, x, boxHeight - y, offsetX, boxHeight);
             }
         }
 
-        private void CreateNewBarChart()
+        private void CreateNewBarChart(bool shuffle)
         {
             bmp = new Bitmap(BarChartBox.Width, BarChartBox.Height);
             g = Graphics.FromImage(bmp);
@@ -93,7 +89,11 @@ namespace SeeSortingAlgorithms
             numberOfElements = (int)AdjustElements.Value;
 
             GenerateList(numbers);
-            ShuffleList(numbers);
+            if (shuffle == true)
+            {
+                ShuffleList(numbers);
+            }
+
             DrawBarChart(numbers);
         }
 
@@ -104,7 +104,7 @@ namespace SeeSortingAlgorithms
 
         private void Shuffle_Click(object sender, EventArgs e)
         {
-            CreateNewBarChart();
+            CreateNewBarChart(true);
         }
 
         private void Sort_Click(object sender, EventArgs e)
@@ -115,7 +115,7 @@ namespace SeeSortingAlgorithms
             {
                 try
                 {
-                    switch (SelectTheAlgorithm.Text)
+                    switch (SelectAlgorithm.Text)
                     {
                         case "Bubble Sort":
                             sortingAlgorithm.BubbleSort(numbers);

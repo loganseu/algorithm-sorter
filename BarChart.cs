@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 using System.Drawing;
 using System.Windows.Forms;
@@ -30,18 +27,17 @@ namespace SeeSortingAlgorithms
             sortingSpeed = speed;
             numberOfElements = elements;
             DrawBarChart(numbers);
-
         }
 
-        private void DrawBarChart(List<int> numbers)
+        public void DrawBarChart(List<int> numbers)
         {
             int boxWidth = BarChartBox.Width;
             int boxHeight = BarChartBox.Height;
+            int offsetX = (int)Math.Ceiling((double)boxWidth / numbers.Count);
 
             for (int i = 0; i < numbers.Count; ++i)
             {
-                int offsetX = (int)Math.Round(((double)boxWidth / numbers.Count), 0);
-                int x = (int)(((double)boxWidth / numbers.Count) * i);
+                int x = offsetX * i;
                 int y = (int)(((double)boxHeight / numbers.Count) * numbers[i]);
                 g.FillRectangle(Brushes.White, x, boxHeight - y, offsetX, boxHeight);
             }
@@ -62,7 +58,7 @@ namespace SeeSortingAlgorithms
             RedrawBar(j, numbers, Brushes.Green);
             SwapValues(numbers, i, j);
             BarChartBox.Refresh();
-            Thread.Sleep(100);
+            Thread.Sleep(sortingSpeed);
             RedrawBar(i, numbers, Brushes.White);
             RedrawBar(j, numbers, Brushes.White);
             BarChartBox.Refresh();
