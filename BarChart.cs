@@ -122,9 +122,11 @@ namespace SeeSortingAlgorithms
                         min_index = j;
                     }
                 }
-                numbers[min_index] = numbers[i];
-                numbers[i] = min;
-                RecolorBars(numbers, i, min_index);
+
+                if (i != min_index)
+                {
+                    RecolorBars(numbers, i, min_index);
+                }
             }
         }
 

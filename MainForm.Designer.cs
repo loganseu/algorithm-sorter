@@ -37,7 +37,7 @@
             this.Shuffle = new System.Windows.Forms.Button();
             this.Sort = new System.Windows.Forms.Button();
             this.ChangeNumberOfElements = new System.Windows.Forms.NumericUpDown();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.SelectTheAlgorithm = new System.Windows.Forms.ComboBox();
             this.AdjustElements = new System.Windows.Forms.NumericUpDown();
             this.AdjustSpeed = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.BarChartBox)).BeginInit();
@@ -134,19 +134,19 @@
             this.ChangeNumberOfElements.Size = new System.Drawing.Size(60, 22);
             this.ChangeNumberOfElements.TabIndex = 10;
             // 
-            // comboBox1
+            // SelectTheAlgorithm
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.SelectTheAlgorithm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SelectTheAlgorithm.FormattingEnabled = true;
+            this.SelectTheAlgorithm.Items.AddRange(new object[] {
             "Bubble Sort",
             "Insertion Sort",
             "Selection Sort"});
-            this.comboBox1.Location = new System.Drawing.Point(176, 134);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(140, 24);
-            this.comboBox1.TabIndex = 5;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.SelectAlgorithm_SelectedIndexChanged);
+            this.SelectTheAlgorithm.Location = new System.Drawing.Point(176, 134);
+            this.SelectTheAlgorithm.Name = "SelectTheAlgorithm";
+            this.SelectTheAlgorithm.Size = new System.Drawing.Size(140, 24);
+            this.SelectTheAlgorithm.TabIndex = 5;
+            this.SelectTheAlgorithm.SelectedIndexChanged += new System.EventHandler(this.SelectAlgorithm_SelectedIndexChanged);
             // 
             // AdjustElements
             // 
@@ -212,7 +212,7 @@
             this.Controls.Add(this.ChangeNumberOfElements);
             this.Controls.Add(this.Sort);
             this.Controls.Add(this.Shuffle);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.SelectTheAlgorithm);
             this.Controls.Add(this.BarChartBox);
             this.Controls.Add(this.SelectAlgorithm);
             this.Controls.Add(this.SortingSpeed);
@@ -243,7 +243,7 @@
         private System.Windows.Forms.Button Shuffle;
         private System.Windows.Forms.Button Sort;
         private System.Windows.Forms.NumericUpDown ChangeNumberOfElements;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox SelectTheAlgorithm;
         private System.Windows.Forms.NumericUpDown AdjustElements;
         private System.Windows.Forms.NumericUpDown AdjustSpeed;
     }

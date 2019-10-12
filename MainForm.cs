@@ -17,10 +17,12 @@ namespace SeeSortingAlgorithms
         List<int> numbers;
         public int numberOfElements { get; set; }
         public int speed { get; set; }
+        public string sortingTime { get; set; }
 
         public MainForm()
         {
             InitializeComponent();
+            SelectTheAlgorithm.SelectedIndex = 0;
         }
 
         public enum SortingTime
@@ -107,7 +109,18 @@ namespace SeeSortingAlgorithms
             {
                 try
                 {
-                    sortingAlgorithm.SelectionSort(numbers);
+                    switch (SelectTheAlgorithm.Text)
+                    {
+                        case "Bubble Sort":
+                            sortingAlgorithm.BubbleSort(numbers);
+                            break;
+                        case "Insertion Sort":
+                            sortingAlgorithm.InsertionSort(numbers);
+                            break;
+                        case "Selection Sort":
+                            sortingAlgorithm.SelectionSort(numbers);
+                            break;
+                    }
                 }
                 catch (Exception err)
                 {
