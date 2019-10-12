@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
@@ -102,7 +101,21 @@ namespace SeeSortingAlgorithms
 
         private void Sort_Click(object sender, EventArgs e)
         {
-            BarChart sortingAlgorithm = new BarChart(BarChartBox, speed, numberOfElements);
+            BarChart sortingAlgorithm = new BarChart(BarChartBox, speed, numberOfElements, numbers);
+
+            ThreadStart ts = delegate ()
+            {
+                try
+                {
+                    sortingAlgorithm.SelectionSort(numbers);
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            };
+            Thread t = new Thread(ts);
+            t.Start();
         }
     }
 }

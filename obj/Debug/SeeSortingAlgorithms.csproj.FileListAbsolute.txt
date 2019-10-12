@@ -16,3 +16,4 @@ C:\Users\Logan Seu\Documents\Github\Visualize-Sort-Algo\obj\Debug\SeeSortingAlgo
 C:\Users\Logan Seu\Documents\Github\Visualize-Sort-Algo\obj\Debug\SeeSortingAlgorithms.csproj.CoreCompileInputs.cache
 C:\Users\Logan Seu\Documents\Github\Visualize-Sort-Algo\obj\Debug\SeeSortingAlgorithms.exe
 C:\Users\Logan Seu\Documents\Github\Visualize-Sort-Algo\obj\Debug\SeeSortingAlgorithms.pdb
+C:\Users\Logan Seu\Documents\Github\Visualize-Sort-Algo\obj\Debug\SeeSortingAlgorithms.MainForm.resources

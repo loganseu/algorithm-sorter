@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Threading;
 
 namespace SeeSortingAlgorithms
 {
@@ -20,31 +21,29 @@ namespace SeeSortingAlgorithms
 
     //public static SortingTime currentSortingTime { get; set; }
 
-    public BarChart(PictureBox p, int speed, int elements)
+        public BarChart(PictureBox p, int speed, int elements, List<int> numbers)
         {
             bmp = new Bitmap(p.Width, p.Height);
             g = Graphics.FromImage(bmp);
             BarChartBox = p;
+            BarChartBox.Image = bmp;
             sortingSpeed = speed;
             numberOfElements = elements;
+            DrawBarChart(numbers);
+
         }
 
-        private void BubbleSort(List<int> numbers)
+        private void DrawBarChart(List<int> numbers)
         {
-            for (int i = 0; i < numbers.Count - 1; ++i)
+            int boxWidth = BarChartBox.Width;
+            int boxHeight = BarChartBox.Height;
+
+            for (int i = 0; i < numbers.Count; ++i)
             {
-                for (int j = i + 1; j < numbers.Count; ++j)
-                {
-                    if (numbers[i] > numbers[j])
-                    {
-                        SwapValues(numbers, i, j);
-                        RedrawItem(i, numbers, Brushes.Red);
-                        RedrawItem(j, numbers, Brushes.Green);
-                        BarChartBox.Refresh();
-                        RedrawItem(i, numbers, Brushes.White);
-                        RedrawItem(j, numbers, Brushes.White);
-                    }
-                }
+                int offsetX = (int)Math.Round(((double)boxWidth / numbers.Count), 0);
+                int x = (int)(((double)boxWidth / numbers.Count) * i);
+                int y = (int)(((double)boxHeight / numbers.Count) * numbers[i]);
+                g.FillRectangle(Brushes.White, x, boxHeight - y, offsetX, boxHeight);
             }
         }
 
@@ -57,7 +56,19 @@ namespace SeeSortingAlgorithms
             return numbers;
         }
 
-        private void RedrawItem(int index, List<int> numbers, Brush color)
+        public void RecolorBars(List<int> numbers, int i, int j)
+        {
+            RedrawBar(i, numbers, Brushes.Red);
+            RedrawBar(j, numbers, Brushes.Green);
+            SwapValues(numbers, i, j);
+            BarChartBox.Refresh();
+            Thread.Sleep(100);
+            RedrawBar(i, numbers, Brushes.White);
+            RedrawBar(j, numbers, Brushes.White);
+            BarChartBox.Refresh();
+        }
+
+        private void RedrawBar(int index, List<int> numbers, Brush color)
         {
             int boxWidth = BarChartBox.Width;
             int boxHeight = BarChartBox.Height;
@@ -69,7 +80,21 @@ namespace SeeSortingAlgorithms
             g.FillRectangle(color, x, boxHeight - y, offsetX, boxHeight);
         }
 
-        public static List<int> InsertionSort(List<int> numbers)
+        public void BubbleSort(List<int> numbers)
+        {
+            for (int i = 0; i < numbers.Count; ++i)
+            {
+                for (int j = 0; j < numbers.Count - 1; ++j)
+                {
+                    if (numbers[j] > numbers[j + 1])
+                    {
+                        RecolorBars(numbers, j, j + 1);
+                    }
+                }
+            }
+        }
+
+        public void InsertionSort(List<int> numbers)
         {
             for (int i = 0; i < numbers.Count - 1; i++)
             {
@@ -77,17 +102,13 @@ namespace SeeSortingAlgorithms
                 {
                     if (numbers[j - 1] > numbers[j])
                     {
-
-                        int temp = j - 1;
-                        SwapValues(numbers, temp, j);
-                        return numbers;
+                        RecolorBars(numbers, j, j - 1);
                     }
                 }
             }
-            return numbers;
         }
 
-        public static List<int> SelectionSort(List<int> numbers)
+        public void SelectionSort(List<int> numbers)
         {
             int min = 0;
             int min_index = 0;
@@ -103,9 +124,8 @@ namespace SeeSortingAlgorithms
                 }
                 numbers[min_index] = numbers[i];
                 numbers[i] = min;
-                return numbers;
+                RecolorBars(numbers, i, min_index);
             }
-            return numbers;
         }
 
         public static string GetEnumDescription(Enum value)
