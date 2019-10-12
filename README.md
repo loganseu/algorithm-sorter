@@ -1,2 +1,2 @@
-# Visualize-Sort-Algo
+# N-Squared
  Allow users to visualize sorting algorithms
