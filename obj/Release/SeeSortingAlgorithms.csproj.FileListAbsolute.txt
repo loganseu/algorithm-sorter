@@ -1,0 +1,10 @@
+C:\GitRepository\Visualize-Sort-Algo\bin\Release\SeeSortingAlgorithms.exe.config
+C:\GitRepository\Visualize-Sort-Algo\bin\Release\SeeSortingAlgorithms.exe
+C:\GitRepository\Visualize-Sort-Algo\bin\Release\SeeSortingAlgorithms.pdb
+C:\GitRepository\Visualize-Sort-Algo\obj\Release\SeeSortingAlgorithms.csprojAssemblyReference.cache
+C:\GitRepository\Visualize-Sort-Algo\obj\Release\SeeSortingAlgorithms.MainForm.resources
+C:\GitRepository\Visualize-Sort-Algo\obj\Release\SeeSortingAlgorithms.Properties.Resources.resources
+C:\GitRepository\Visualize-Sort-Algo\obj\Release\SeeSortingAlgorithms.csproj.GenerateResource.cache
+C:\GitRepository\Visualize-Sort-Algo\obj\Release\SeeSortingAlgorithms.csproj.CoreCompileInputs.cache
+C:\GitRepository\Visualize-Sort-Algo\obj\Release\SeeSortingAlgorithms.exe
+C:\GitRepository\Visualize-Sort-Algo\obj\Release\SeeSortingAlgorithms.pdb

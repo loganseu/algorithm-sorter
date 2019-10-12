@@ -40,10 +40,12 @@
             this.SelectTheAlgorithm = new System.Windows.Forms.ComboBox();
             this.AdjustElements = new System.Windows.Forms.NumericUpDown();
             this.AdjustSpeed = new System.Windows.Forms.NumericUpDown();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.BarChartBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChangeNumberOfElements)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdjustElements)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdjustSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // SelectedAlgorithm
@@ -98,10 +100,13 @@
             // 
             // BarChartBox
             // 
+            this.BarChartBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.BarChartBox.BackColor = System.Drawing.Color.Black;
             this.BarChartBox.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.BarChartBox.Dock = System.Windows.Forms.DockStyle.Right;
             this.BarChartBox.Location = new System.Drawing.Point(342, 0);
+            this.BarChartBox.Margin = new System.Windows.Forms.Padding(0);
             this.BarChartBox.Name = "BarChartBox";
             this.BarChartBox.Size = new System.Drawing.Size(1040, 653);
             this.BarChartBox.TabIndex = 6;
@@ -202,11 +207,22 @@
             0,
             0});
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.Location = new System.Drawing.Point(23, 246);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(293, 395);
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1382, 653);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.AdjustSpeed);
             this.Controls.Add(this.AdjustElements);
             this.Controls.Add(this.ChangeNumberOfElements);
@@ -223,10 +239,12 @@
             this.MinimumSize = new System.Drawing.Size(1400, 700);
             this.Name = "MainForm";
             this.Text = "Visualize Sorting Algorithms";
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.BarChartBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChangeNumberOfElements)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdjustElements)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdjustSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,6 +264,7 @@
         private System.Windows.Forms.ComboBox SelectTheAlgorithm;
         private System.Windows.Forms.NumericUpDown AdjustElements;
         private System.Windows.Forms.NumericUpDown AdjustSpeed;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

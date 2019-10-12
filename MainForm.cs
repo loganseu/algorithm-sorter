@@ -22,6 +22,7 @@ namespace SeeSortingAlgorithms
         public MainForm()
         {
             InitializeComponent();
+            CreateNewBarChart();
             SelectTheAlgorithm.SelectedIndex = 0;
         }
 
@@ -82,6 +83,20 @@ namespace SeeSortingAlgorithms
             }
         }
 
+        private void CreateNewBarChart()
+        {
+            bmp = new Bitmap(BarChartBox.Width, BarChartBox.Height);
+            g = Graphics.FromImage(bmp);
+            BarChartBox.Image = bmp;
+
+            numbers = new List<int>();
+            numberOfElements = (int)AdjustElements.Value;
+
+            GenerateList(numbers);
+            ShuffleList(numbers);
+            DrawBarChart(numbers);
+        }
+
         private void SelectAlgorithm_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -89,16 +104,7 @@ namespace SeeSortingAlgorithms
 
         private void Shuffle_Click(object sender, EventArgs e)
         {
-            bmp = new Bitmap(BarChartBox.Width, BarChartBox.Height);
-            g = Graphics.FromImage(bmp);
-            BarChartBox.Image = bmp;
-
-            numbers = new List<int>();
-            numberOfElements = (int) AdjustElements.Value;
-
-            GenerateList(numbers);
-            ShuffleList(numbers);
-            DrawBarChart(numbers);
+            CreateNewBarChart();
         }
 
         private void Sort_Click(object sender, EventArgs e)
@@ -129,6 +135,14 @@ namespace SeeSortingAlgorithms
             };
             Thread t = new Thread(ts);
             t.Start();
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            bmp = new Bitmap(BarChartBox.Width, BarChartBox.Height);
+            g = Graphics.FromImage(bmp);
+            BarChartBox.Image = bmp;
+            DrawBarChart(numbers);
         }
     }
 }
