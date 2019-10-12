@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
@@ -21,18 +20,6 @@ namespace SeeSortingAlgorithms
             InitializeComponent();
             SelectAlgorithm.SelectedIndex = 0;
             CreateNewBarChart(false);
-        }
-
-        public enum SortingTime
-        {
-            [Description("O(1)")]
-            OTOTHE1,
-            [Description("O(N)")]
-            OTOTHEN,
-            [Description("O(Nlog(N))")]
-            ONLOGN,
-            [Description("O(N^2)")]
-            OTONSQUARED
         }
 
         public List<int> SwapValues(List<int> numbers, int a, int b)
@@ -99,7 +86,27 @@ namespace SeeSortingAlgorithms
 
         private void SelectAlgorithm_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            switch (SelectAlgorithm.Text)
+            {
+                case "Bubble Sort":
+                    AverageCaseText.Text = "O(n!)";
+                    AverageCaseText.ForeColor = Color.Red;
+                    WorstCaseText.Text = "O(n!)";
+                    WorstCaseText.ForeColor = Color.Red;
+                    break;
+                case "Insertion Sort":
+                    AverageCaseText.Text = "O(2ⁿ)";
+                    AverageCaseText.ForeColor = Color.Yellow;
+                    WorstCaseText.Text = "O(n!)";
+                    WorstCaseText.ForeColor = Color.Blue;
+                    break;
+                case "Selection Sort":
+                    AverageCaseText.Text = "O(n²)";
+                    AverageCaseText.ForeColor = Color.Green;
+                    WorstCaseText.Text = "O(n!)";
+                    WorstCaseText.ForeColor = Color.Orange;
+                    break;
+            }
         }
 
         private void Shuffle_Click(object sender, EventArgs e)
@@ -119,12 +126,16 @@ namespace SeeSortingAlgorithms
                     {
                         case "Bubble Sort":
                             sortingAlgorithm.BubbleSort(numbers);
+                            BarChartBox.Refresh();
                             break;
                         case "Insertion Sort":
                             sortingAlgorithm.InsertionSort(numbers);
+                            BarChartBox.Refresh();
+
                             break;
                         case "Selection Sort":
                             sortingAlgorithm.SelectionSort(numbers);
+                            BarChartBox.Refresh();
                             break;
                     }
                 }
@@ -144,5 +155,6 @@ namespace SeeSortingAlgorithms
             BarChartBox.Image = bmp;
             DrawBarChart(numbers);
         }
+
     }
 }

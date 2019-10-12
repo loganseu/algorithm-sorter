@@ -31,7 +31,7 @@
             this.SelectedAlgorithm = new System.Windows.Forms.Label();
             this.NumberofElements = new System.Windows.Forms.Label();
             this.SortingSpeed = new System.Windows.Forms.Label();
-            this.ONotationTime = new System.Windows.Forms.Label();
+            this.AverageCaseTime = new System.Windows.Forms.Label();
             this.SelectAlgorithm = new System.Windows.Forms.ComboBox();
             this.BarChartBox = new System.Windows.Forms.PictureBox();
             this.Shuffle = new System.Windows.Forms.Button();
@@ -39,6 +39,9 @@
             this.AdjustElements = new System.Windows.Forms.NumericUpDown();
             this.AdjustSpeed = new System.Windows.Forms.NumericUpDown();
             this.InfoBox = new System.Windows.Forms.PictureBox();
+            this.AverageCaseText = new System.Windows.Forms.TextBox();
+            this.WorstCaseText = new System.Windows.Forms.TextBox();
+            this.WorstCaseTime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.BarChartBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdjustElements)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdjustSpeed)).BeginInit();
@@ -48,7 +51,7 @@
             // SelectedAlgorithm
             // 
             this.SelectedAlgorithm.AutoSize = true;
-            this.SelectedAlgorithm.Location = new System.Drawing.Point(38, 130);
+            this.SelectedAlgorithm.Location = new System.Drawing.Point(50, 95);
             this.SelectedAlgorithm.Name = "SelectedAlgorithm";
             this.SelectedAlgorithm.Size = new System.Drawing.Size(130, 17);
             this.SelectedAlgorithm.TabIndex = 0;
@@ -57,7 +60,7 @@
             // NumberofElements
             // 
             this.NumberofElements.AutoSize = true;
-            this.NumberofElements.Location = new System.Drawing.Point(28, 60);
+            this.NumberofElements.Location = new System.Drawing.Point(40, 25);
             this.NumberofElements.Name = "NumberofElements";
             this.NumberofElements.Size = new System.Drawing.Size(140, 17);
             this.NumberofElements.TabIndex = 1;
@@ -66,20 +69,20 @@
             // SortingSpeed
             // 
             this.SortingSpeed.AutoSize = true;
-            this.SortingSpeed.Location = new System.Drawing.Point(34, 95);
+            this.SortingSpeed.Location = new System.Drawing.Point(46, 60);
             this.SortingSpeed.Name = "SortingSpeed";
             this.SortingSpeed.Size = new System.Drawing.Size(134, 17);
             this.SortingSpeed.TabIndex = 2;
             this.SortingSpeed.Text = "Sorting Speed (ms):";
             // 
-            // ONotationTime
+            // AverageCaseTime
             // 
-            this.ONotationTime.AutoSize = true;
-            this.ONotationTime.Location = new System.Drawing.Point(100, 25);
-            this.ONotationTime.Name = "ONotationTime";
-            this.ONotationTime.Size = new System.Drawing.Size(68, 17);
-            this.ONotationTime.TabIndex = 0;
-            this.ONotationTime.Text = "Time (O):";
+            this.AverageCaseTime.AutoSize = true;
+            this.AverageCaseTime.Location = new System.Drawing.Point(19, 130);
+            this.AverageCaseTime.Name = "AverageCaseTime";
+            this.AverageCaseTime.Size = new System.Drawing.Size(161, 17);
+            this.AverageCaseTime.TabIndex = 0;
+            this.AverageCaseTime.Text = "Average Case Time (O):";
             // 
             // SelectAlgorithm
             // 
@@ -89,7 +92,8 @@
             "Bubble Sort",
             "Insertion Sort",
             "Selection Sort"});
-            this.SelectAlgorithm.Location = new System.Drawing.Point(176, 130);
+            this.SelectAlgorithm.Location = new System.Drawing.Point(200, 95);
+            this.SelectAlgorithm.Margin = new System.Windows.Forms.Padding(0);
             this.SelectAlgorithm.Name = "SelectAlgorithm";
             this.SelectAlgorithm.Size = new System.Drawing.Size(120, 24);
             this.SelectAlgorithm.TabIndex = 5;
@@ -112,9 +116,9 @@
             // Shuffle
             // 
             this.Shuffle.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Shuffle.Location = new System.Drawing.Point(176, 181);
+            this.Shuffle.Location = new System.Drawing.Point(225, 204);
             this.Shuffle.Name = "Shuffle";
-            this.Shuffle.Size = new System.Drawing.Size(101, 40);
+            this.Shuffle.Size = new System.Drawing.Size(100, 40);
             this.Shuffle.TabIndex = 8;
             this.Shuffle.Text = "Shuffle";
             this.Shuffle.UseVisualStyleBackColor = true;
@@ -123,9 +127,9 @@
             // Sort
             // 
             this.Sort.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Sort.Location = new System.Drawing.Point(69, 181);
+            this.Sort.Location = new System.Drawing.Point(25, 204);
             this.Sort.Name = "Sort";
-            this.Sort.Size = new System.Drawing.Size(101, 40);
+            this.Sort.Size = new System.Drawing.Size(100, 40);
             this.Sort.TabIndex = 9;
             this.Sort.Text = "Sort!";
             this.Sort.UseVisualStyleBackColor = true;
@@ -138,7 +142,8 @@
             0,
             0,
             0});
-            this.AdjustElements.Location = new System.Drawing.Point(176, 60);
+            this.AdjustElements.Location = new System.Drawing.Point(200, 25);
+            this.AdjustElements.Margin = new System.Windows.Forms.Padding(0);
             this.AdjustElements.Maximum = new decimal(new int[] {
             120,
             0,
@@ -165,7 +170,8 @@
             0,
             0,
             0});
-            this.AdjustSpeed.Location = new System.Drawing.Point(176, 95);
+            this.AdjustSpeed.Location = new System.Drawing.Point(200, 60);
+            this.AdjustSpeed.Margin = new System.Windows.Forms.Padding(0);
             this.AdjustSpeed.Maximum = new decimal(new int[] {
             500,
             0,
@@ -197,12 +203,46 @@
             this.InfoBox.TabIndex = 11;
             this.InfoBox.TabStop = false;
             // 
+            // AverageCaseText
+            // 
+            this.AverageCaseText.BackColor = System.Drawing.Color.LightGray;
+            this.AverageCaseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.AverageCaseText.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AverageCaseText.Location = new System.Drawing.Point(200, 130);
+            this.AverageCaseText.Margin = new System.Windows.Forms.Padding(0);
+            this.AverageCaseText.Name = "AverageCaseText";
+            this.AverageCaseText.Size = new System.Drawing.Size(100, 23);
+            this.AverageCaseText.TabIndex = 12;
+            // 
+            // WorstCaseText
+            // 
+            this.WorstCaseText.BackColor = System.Drawing.Color.LightGray;
+            this.WorstCaseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.WorstCaseText.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WorstCaseText.Location = new System.Drawing.Point(200, 165);
+            this.WorstCaseText.Margin = new System.Windows.Forms.Padding(0);
+            this.WorstCaseText.Name = "WorstCaseText";
+            this.WorstCaseText.Size = new System.Drawing.Size(100, 23);
+            this.WorstCaseText.TabIndex = 13;
+            // 
+            // WorstCaseTime
+            // 
+            this.WorstCaseTime.AutoSize = true;
+            this.WorstCaseTime.Location = new System.Drawing.Point(35, 165);
+            this.WorstCaseTime.Name = "WorstCaseTime";
+            this.WorstCaseTime.Size = new System.Drawing.Size(145, 17);
+            this.WorstCaseTime.TabIndex = 14;
+            this.WorstCaseTime.Text = "Worst Case Time (O):";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1382, 653);
+            this.Controls.Add(this.WorstCaseTime);
+            this.Controls.Add(this.WorstCaseText);
+            this.Controls.Add(this.AverageCaseText);
             this.Controls.Add(this.InfoBox);
             this.Controls.Add(this.AdjustSpeed);
             this.Controls.Add(this.AdjustElements);
@@ -212,7 +252,7 @@
             this.Controls.Add(this.SelectAlgorithm);
             this.Controls.Add(this.SortingSpeed);
             this.Controls.Add(this.NumberofElements);
-            this.Controls.Add(this.ONotationTime);
+            this.Controls.Add(this.AverageCaseTime);
             this.Controls.Add(this.SelectedAlgorithm);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.KeyPreview = true;
@@ -234,7 +274,7 @@
         private System.Windows.Forms.Label SelectedAlgorithm;
         private System.Windows.Forms.Label NumberofElements;
         private System.Windows.Forms.Label SortingSpeed;
-        private System.Windows.Forms.Label ONotationTime;
+        private System.Windows.Forms.Label AverageCaseTime;
         private System.Windows.Forms.ComboBox SelectAlgorithm;
         private System.Windows.Forms.PictureBox BarChartBox;
         private System.Windows.Forms.Button Shuffle;
@@ -242,6 +282,9 @@
         private System.Windows.Forms.NumericUpDown AdjustElements;
         private System.Windows.Forms.NumericUpDown AdjustSpeed;
         private System.Windows.Forms.PictureBox InfoBox;
+        private System.Windows.Forms.TextBox AverageCaseText;
+        private System.Windows.Forms.TextBox WorstCaseText;
+        private System.Windows.Forms.Label WorstCaseTime;
     }
 }
 
