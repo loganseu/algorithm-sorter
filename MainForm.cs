@@ -131,7 +131,6 @@ namespace SeeSortingAlgorithms
                         case "Insertion Sort":
                             sortingAlgorithm.InsertionSort(numbers);
                             BarChartBox.Refresh();
-
                             break;
                         case "Selection Sort":
                             sortingAlgorithm.SelectionSort(numbers);
@@ -155,6 +154,5 @@ namespace SeeSortingAlgorithms
             BarChartBox.Image = bmp;
             DrawBarChart(numbers);
         }
-
     }
 }

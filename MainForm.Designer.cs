@@ -137,11 +137,6 @@
             // 
             // AdjustElements
             // 
-            this.AdjustElements.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
             this.AdjustElements.Location = new System.Drawing.Point(200, 25);
             this.AdjustElements.Margin = new System.Windows.Forms.Padding(0);
             this.AdjustElements.Maximum = new decimal(new int[] {
