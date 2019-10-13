@@ -51,7 +51,7 @@
             // SelectedAlgorithm
             // 
             this.SelectedAlgorithm.AutoSize = true;
-            this.SelectedAlgorithm.Location = new System.Drawing.Point(50, 95);
+            this.SelectedAlgorithm.Location = new System.Drawing.Point(60, 95);
             this.SelectedAlgorithm.Name = "SelectedAlgorithm";
             this.SelectedAlgorithm.Size = new System.Drawing.Size(130, 17);
             this.SelectedAlgorithm.TabIndex = 0;
@@ -60,7 +60,7 @@
             // NumberofElements
             // 
             this.NumberofElements.AutoSize = true;
-            this.NumberofElements.Location = new System.Drawing.Point(40, 25);
+            this.NumberofElements.Location = new System.Drawing.Point(50, 25);
             this.NumberofElements.Name = "NumberofElements";
             this.NumberofElements.Size = new System.Drawing.Size(140, 17);
             this.NumberofElements.TabIndex = 1;
@@ -69,7 +69,7 @@
             // SortingSpeed
             // 
             this.SortingSpeed.AutoSize = true;
-            this.SortingSpeed.Location = new System.Drawing.Point(46, 60);
+            this.SortingSpeed.Location = new System.Drawing.Point(56, 60);
             this.SortingSpeed.Name = "SortingSpeed";
             this.SortingSpeed.Size = new System.Drawing.Size(134, 17);
             this.SortingSpeed.TabIndex = 2;
@@ -78,7 +78,7 @@
             // AverageCaseTime
             // 
             this.AverageCaseTime.AutoSize = true;
-            this.AverageCaseTime.Location = new System.Drawing.Point(19, 130);
+            this.AverageCaseTime.Location = new System.Drawing.Point(29, 130);
             this.AverageCaseTime.Name = "AverageCaseTime";
             this.AverageCaseTime.Size = new System.Drawing.Size(161, 17);
             this.AverageCaseTime.TabIndex = 0;
@@ -92,7 +92,7 @@
             "Bubble Sort",
             "Insertion Sort",
             "Selection Sort"});
-            this.SelectAlgorithm.Location = new System.Drawing.Point(200, 95);
+            this.SelectAlgorithm.Location = new System.Drawing.Point(210, 95);
             this.SelectAlgorithm.Margin = new System.Windows.Forms.Padding(0);
             this.SelectAlgorithm.Name = "SelectAlgorithm";
             this.SelectAlgorithm.Size = new System.Drawing.Size(120, 24);
@@ -106,17 +106,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BarChartBox.BackColor = System.Drawing.Color.Black;
             this.BarChartBox.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.BarChartBox.Location = new System.Drawing.Point(350, 0);
+            this.BarChartBox.Location = new System.Drawing.Point(382, 0);
             this.BarChartBox.Margin = new System.Windows.Forms.Padding(0);
             this.BarChartBox.Name = "BarChartBox";
-            this.BarChartBox.Size = new System.Drawing.Size(1032, 653);
+            this.BarChartBox.Size = new System.Drawing.Size(1200, 853);
             this.BarChartBox.TabIndex = 6;
             this.BarChartBox.TabStop = false;
             // 
             // Shuffle
             // 
             this.Shuffle.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Shuffle.Location = new System.Drawing.Point(225, 204);
+            this.Shuffle.Location = new System.Drawing.Point(235, 204);
             this.Shuffle.Name = "Shuffle";
             this.Shuffle.Size = new System.Drawing.Size(100, 40);
             this.Shuffle.TabIndex = 8;
@@ -127,7 +127,7 @@
             // Sort
             // 
             this.Sort.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Sort.Location = new System.Drawing.Point(25, 204);
+            this.Sort.Location = new System.Drawing.Point(35, 204);
             this.Sort.Name = "Sort";
             this.Sort.Size = new System.Drawing.Size(100, 40);
             this.Sort.TabIndex = 9;
@@ -137,7 +137,13 @@
             // 
             // AdjustElements
             // 
-            this.AdjustElements.Location = new System.Drawing.Point(200, 25);
+            this.AdjustElements.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AdjustElements.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.AdjustElements.Location = new System.Drawing.Point(210, 25);
             this.AdjustElements.Margin = new System.Windows.Forms.Padding(0);
             this.AdjustElements.Maximum = new decimal(new int[] {
             120,
@@ -145,27 +151,31 @@
             0,
             0});
             this.AdjustElements.Minimum = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
             this.AdjustElements.Name = "AdjustElements";
+            this.AdjustElements.ReadOnly = true;
             this.AdjustElements.Size = new System.Drawing.Size(60, 22);
             this.AdjustElements.TabIndex = 10;
+            this.AdjustElements.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.AdjustElements.Value = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});
+            this.AdjustElements.ValueChanged += new System.EventHandler(this.AdjustElements_ValueChanged);
             // 
             // AdjustSpeed
             // 
+            this.AdjustSpeed.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AdjustSpeed.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.AdjustSpeed.Location = new System.Drawing.Point(200, 60);
+            this.AdjustSpeed.Location = new System.Drawing.Point(210, 60);
             this.AdjustSpeed.Margin = new System.Windows.Forms.Padding(0);
             this.AdjustSpeed.Maximum = new decimal(new int[] {
             500,
@@ -178,13 +188,16 @@
             0,
             0});
             this.AdjustSpeed.Name = "AdjustSpeed";
+            this.AdjustSpeed.ReadOnly = true;
             this.AdjustSpeed.Size = new System.Drawing.Size(60, 22);
             this.AdjustSpeed.TabIndex = 10;
+            this.AdjustSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.AdjustSpeed.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
+            this.AdjustSpeed.ValueChanged += new System.EventHandler(this.AdjustSpeed_ValueChanged);
             // 
             // InfoBox
             // 
@@ -192,9 +205,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.InfoBox.BackColor = System.Drawing.Color.White;
             this.InfoBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.InfoBox.Location = new System.Drawing.Point(25, 250);
+            this.InfoBox.Location = new System.Drawing.Point(35, 250);
             this.InfoBox.Name = "InfoBox";
-            this.InfoBox.Size = new System.Drawing.Size(300, 378);
+            this.InfoBox.Size = new System.Drawing.Size(312, 578);
             this.InfoBox.TabIndex = 11;
             this.InfoBox.TabStop = false;
             // 
@@ -203,7 +216,7 @@
             this.AverageCaseText.BackColor = System.Drawing.Color.LightGray;
             this.AverageCaseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AverageCaseText.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AverageCaseText.Location = new System.Drawing.Point(200, 130);
+            this.AverageCaseText.Location = new System.Drawing.Point(210, 130);
             this.AverageCaseText.Margin = new System.Windows.Forms.Padding(0);
             this.AverageCaseText.Name = "AverageCaseText";
             this.AverageCaseText.Size = new System.Drawing.Size(100, 23);
@@ -214,7 +227,7 @@
             this.WorstCaseText.BackColor = System.Drawing.Color.LightGray;
             this.WorstCaseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.WorstCaseText.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WorstCaseText.Location = new System.Drawing.Point(200, 165);
+            this.WorstCaseText.Location = new System.Drawing.Point(210, 165);
             this.WorstCaseText.Margin = new System.Windows.Forms.Padding(0);
             this.WorstCaseText.Name = "WorstCaseText";
             this.WorstCaseText.Size = new System.Drawing.Size(100, 23);
@@ -223,7 +236,7 @@
             // WorstCaseTime
             // 
             this.WorstCaseTime.AutoSize = true;
-            this.WorstCaseTime.Location = new System.Drawing.Point(35, 165);
+            this.WorstCaseTime.Location = new System.Drawing.Point(45, 165);
             this.WorstCaseTime.Name = "WorstCaseTime";
             this.WorstCaseTime.Size = new System.Drawing.Size(145, 17);
             this.WorstCaseTime.TabIndex = 14;
@@ -234,7 +247,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(1382, 653);
+            this.ClientSize = new System.Drawing.Size(1582, 853);
             this.Controls.Add(this.WorstCaseTime);
             this.Controls.Add(this.WorstCaseText);
             this.Controls.Add(this.AverageCaseText);
@@ -250,8 +263,11 @@
             this.Controls.Add(this.AverageCaseTime);
             this.Controls.Add(this.SelectedAlgorithm);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(1400, 700);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1600, 900);
+            this.MinimumSize = new System.Drawing.Size(1600, 900);
             this.Name = "MainForm";
             this.Text = "Visualize Sorting Algorithms";
             this.Resize += new System.EventHandler(this.MainForm_Resize);

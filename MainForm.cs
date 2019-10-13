@@ -126,15 +126,12 @@ namespace SeeSortingAlgorithms
                     {
                         case "Bubble Sort":
                             sortingAlgorithm.BubbleSort(numbers);
-                            BarChartBox.Refresh();
                             break;
                         case "Insertion Sort":
                             sortingAlgorithm.InsertionSort(numbers);
-                            BarChartBox.Refresh();
                             break;
                         case "Selection Sort":
                             sortingAlgorithm.SelectionSort(numbers);
-                            BarChartBox.Refresh();
                             break;
                     }
                 }
@@ -153,6 +150,19 @@ namespace SeeSortingAlgorithms
             g = Graphics.FromImage(bmp);
             BarChartBox.Image = bmp;
             DrawBarChart(numbers);
+        }
+
+        private void AdjustSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            if (AdjustSpeed.Value % 10 == 0)
+            {
+                speed = (int)Math.Round(AdjustSpeed.Value, 0);
+            }
+        }
+
+        private void AdjustElements_ValueChanged(object sender, EventArgs e)
+        {
+            CreateNewBarChart(false);
         }
     }
 }

@@ -71,7 +71,7 @@ namespace SeeSortingAlgorithms
 
             int x = (int)(((double)boxWidth / numbers.Count) * index);
             int y = (int)(((double)boxHeight / numbers.Count) * numbers[index]);
-            int offsetX = (int)Math.Round(((double)boxWidth / numbers.Count), 0);
+            int offsetX = (int)Math.Ceiling(((double)boxWidth / numbers.Count));
             g.FillRectangle(Brushes.Black, x, 0, offsetX, boxHeight);
             g.FillRectangle(color, x, boxHeight - y, offsetX, boxHeight);
         }
@@ -98,7 +98,7 @@ namespace SeeSortingAlgorithms
                 {
                     if (numbers[j - 1] > numbers[j])
                     {
-                        RecolorBars(numbers, j, j - 1);
+                        RecolorBars(numbers, j - 1, j);
                     }
                 }
             }
@@ -118,7 +118,6 @@ namespace SeeSortingAlgorithms
                         min_index = j;
                     }
                 }
-
                 if (i != min_index)
                 {
                     RecolorBars(numbers, i, min_index);
