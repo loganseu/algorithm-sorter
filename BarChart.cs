@@ -16,8 +16,6 @@ namespace SeeSortingAlgorithms
         public int sortingSpeed { get; set; }
         PictureBox BarChartBox;
 
-    //public static SortingTime currentSortingTime { get; set; }
-
         public BarChart(PictureBox p, int speed, int elements, List<int> numbers)
         {
             bmp = new Bitmap(p.Width, p.Height);
@@ -43,7 +41,7 @@ namespace SeeSortingAlgorithms
             }
         }
 
-        public static List<int> SwapValues(List<int> numbers, int a, int b)
+        public List<int> SwapValues(List<int> numbers, int a, int b)
         {
             int temp = numbers[b];
             numbers[b] = numbers[a];
@@ -55,7 +53,7 @@ namespace SeeSortingAlgorithms
         public void RecolorBars(List<int> numbers, int i, int j)
         {
             RedrawBar(i, numbers, Brushes.Red);
-            RedrawBar(j, numbers, Brushes.Green);
+            RedrawBar(j, numbers, Brushes.LimeGreen);
             SwapValues(numbers, i, j);
             BarChartBox.Refresh();
             Thread.Sleep(sortingSpeed);
@@ -125,17 +123,24 @@ namespace SeeSortingAlgorithms
             }
         }
 
-        public static string GetEnumDescription(Enum value)
+        //Named after the piano technique where you run your hand across the keyboard.
+        public void Glissando(List<int> numbers)
         {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
+            int boxWidth = BarChartBox.Width;
+            int boxHeight = BarChartBox.Height;
+            int offsetX = (int)Math.Ceiling((double)boxWidth / numbers.Count);
 
-            DescriptionAttribute[] attributes =
-                (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            for (int i = 0; i < numbers.Count; ++i)
+            {
+                int x = offsetX * i;
+                int y = (int)(((double)boxHeight / numbers.Count) * numbers[i]);
+                g.FillRectangle(Brushes.LimeGreen, x, boxHeight - y, offsetX, boxHeight);
+                BarChartBox.Refresh();
+                Thread.Sleep(20);
+            }
 
-            if (attributes != null && attributes.Length > 0)
-                return attributes[0].Description;
-            else
-                return value.ToString();
+            DrawBarChart(numbers);
+            BarChartBox.Refresh();
         }
     }
 }

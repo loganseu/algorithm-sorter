@@ -84,27 +84,40 @@ namespace SeeSortingAlgorithms
             DrawBarChart(numbers);
         }
 
+        private void DisableControls()
+        {
+            Sort.Enabled = false;
+            Shuffle.Enabled = false;
+        }
+
+        private void EnableControls()
+        {
+            Sort.Enabled = true;
+            Shuffle.Enabled = true;
+        }
+
+
         private void SelectAlgorithm_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (SelectAlgorithm.Text)
             {
                 case "Bubble Sort":
-                    AverageCaseText.Text = "O(n!)";
-                    AverageCaseText.ForeColor = Color.Red;
-                    WorstCaseText.Text = "O(n!)";
-                    WorstCaseText.ForeColor = Color.Red;
+                    TimeComplexityText.Text = "O(n²)";
+                    TimeComplexityText.ForeColor = Color.Red;
+                    SpaceComplexityText.Text = "O(1)";
+                    SpaceComplexityText.ForeColor = Color.LimeGreen;
                     break;
                 case "Insertion Sort":
-                    AverageCaseText.Text = "O(2ⁿ)";
-                    AverageCaseText.ForeColor = Color.Yellow;
-                    WorstCaseText.Text = "O(n!)";
-                    WorstCaseText.ForeColor = Color.Blue;
+                    TimeComplexityText.Text = "O(n²)";
+                    TimeComplexityText.ForeColor = Color.Red;
+                    SpaceComplexityText.Text = "O(1)";
+                    SpaceComplexityText.ForeColor = Color.LimeGreen;
                     break;
                 case "Selection Sort":
-                    AverageCaseText.Text = "O(n²)";
-                    AverageCaseText.ForeColor = Color.Green;
-                    WorstCaseText.Text = "O(n!)";
-                    WorstCaseText.ForeColor = Color.Orange;
+                    TimeComplexityText.Text = "O(n²)";
+                    TimeComplexityText.ForeColor = Color.Red;
+                    SpaceComplexityText.Text = "O(1)";
+                    SpaceComplexityText.ForeColor = Color.LimeGreen;
                     break;
             }
         }
@@ -118,22 +131,31 @@ namespace SeeSortingAlgorithms
         {
             BarChart sortingAlgorithm = new BarChart(BarChartBox, speed, numberOfElements, numbers);
 
-            ThreadStart ts = delegate ()
+            ThreadStart ts = delegate()
             {
                 try
                 {
                     switch (SelectAlgorithm.Text)
                     {
                         case "Bubble Sort":
+                            DisableControls();
                             sortingAlgorithm.BubbleSort(numbers);
                             break;
+
                         case "Insertion Sort":
+                            DisableControls();
                             sortingAlgorithm.InsertionSort(numbers);
                             break;
+
                         case "Selection Sort":
+                            DisableControls();
                             sortingAlgorithm.SelectionSort(numbers);
                             break;
                     }
+
+                    EnableControls();
+                    sortingAlgorithm.Glissando(numbers);
+
                 }
                 catch (Exception err)
                 {

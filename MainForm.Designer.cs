@@ -31,7 +31,7 @@
             this.SelectedAlgorithm = new System.Windows.Forms.Label();
             this.NumberofElements = new System.Windows.Forms.Label();
             this.SortingSpeed = new System.Windows.Forms.Label();
-            this.AverageCaseTime = new System.Windows.Forms.Label();
+            this.TimeComplexity = new System.Windows.Forms.Label();
             this.SelectAlgorithm = new System.Windows.Forms.ComboBox();
             this.BarChartBox = new System.Windows.Forms.PictureBox();
             this.Shuffle = new System.Windows.Forms.Button();
@@ -39,8 +39,8 @@
             this.AdjustElements = new System.Windows.Forms.NumericUpDown();
             this.AdjustSpeed = new System.Windows.Forms.NumericUpDown();
             this.InfoBox = new System.Windows.Forms.PictureBox();
-            this.AverageCaseText = new System.Windows.Forms.TextBox();
-            this.WorstCaseText = new System.Windows.Forms.TextBox();
+            this.TimeComplexityText = new System.Windows.Forms.TextBox();
+            this.SpaceComplexityText = new System.Windows.Forms.TextBox();
             this.WorstCaseTime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.BarChartBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdjustElements)).BeginInit();
@@ -75,14 +75,14 @@
             this.SortingSpeed.TabIndex = 2;
             this.SortingSpeed.Text = "Sorting Speed (ms):";
             // 
-            // AverageCaseTime
+            // TimeComplexity
             // 
-            this.AverageCaseTime.AutoSize = true;
-            this.AverageCaseTime.Location = new System.Drawing.Point(29, 130);
-            this.AverageCaseTime.Name = "AverageCaseTime";
-            this.AverageCaseTime.Size = new System.Drawing.Size(161, 17);
-            this.AverageCaseTime.TabIndex = 0;
-            this.AverageCaseTime.Text = "Average Case Time (O):";
+            this.TimeComplexity.AutoSize = true;
+            this.TimeComplexity.Location = new System.Drawing.Point(76, 130);
+            this.TimeComplexity.Name = "TimeComplexity";
+            this.TimeComplexity.Size = new System.Drawing.Size(114, 17);
+            this.TimeComplexity.TabIndex = 0;
+            this.TimeComplexity.Text = "Time Complexity:";
             // 
             // SelectAlgorithm
             // 
@@ -211,36 +211,38 @@
             this.InfoBox.TabIndex = 11;
             this.InfoBox.TabStop = false;
             // 
-            // AverageCaseText
+            // TimeComplexityText
             // 
-            this.AverageCaseText.BackColor = System.Drawing.Color.LightGray;
-            this.AverageCaseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.AverageCaseText.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AverageCaseText.Location = new System.Drawing.Point(210, 130);
-            this.AverageCaseText.Margin = new System.Windows.Forms.Padding(0);
-            this.AverageCaseText.Name = "AverageCaseText";
-            this.AverageCaseText.Size = new System.Drawing.Size(100, 23);
-            this.AverageCaseText.TabIndex = 12;
+            this.TimeComplexityText.BackColor = System.Drawing.Color.LightGray;
+            this.TimeComplexityText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TimeComplexityText.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimeComplexityText.Location = new System.Drawing.Point(210, 130);
+            this.TimeComplexityText.Margin = new System.Windows.Forms.Padding(0);
+            this.TimeComplexityText.Name = "TimeComplexityText";
+            this.TimeComplexityText.ReadOnly = true;
+            this.TimeComplexityText.Size = new System.Drawing.Size(100, 23);
+            this.TimeComplexityText.TabIndex = 12;
             // 
-            // WorstCaseText
+            // SpaceComplexityText
             // 
-            this.WorstCaseText.BackColor = System.Drawing.Color.LightGray;
-            this.WorstCaseText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.WorstCaseText.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WorstCaseText.Location = new System.Drawing.Point(210, 165);
-            this.WorstCaseText.Margin = new System.Windows.Forms.Padding(0);
-            this.WorstCaseText.Name = "WorstCaseText";
-            this.WorstCaseText.Size = new System.Drawing.Size(100, 23);
-            this.WorstCaseText.TabIndex = 13;
+            this.SpaceComplexityText.BackColor = System.Drawing.Color.LightGray;
+            this.SpaceComplexityText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.SpaceComplexityText.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SpaceComplexityText.Location = new System.Drawing.Point(210, 165);
+            this.SpaceComplexityText.Margin = new System.Windows.Forms.Padding(0);
+            this.SpaceComplexityText.Name = "SpaceComplexityText";
+            this.SpaceComplexityText.ReadOnly = true;
+            this.SpaceComplexityText.Size = new System.Drawing.Size(100, 23);
+            this.SpaceComplexityText.TabIndex = 13;
             // 
             // WorstCaseTime
             // 
             this.WorstCaseTime.AutoSize = true;
-            this.WorstCaseTime.Location = new System.Drawing.Point(45, 165);
+            this.WorstCaseTime.Location = new System.Drawing.Point(67, 165);
             this.WorstCaseTime.Name = "WorstCaseTime";
-            this.WorstCaseTime.Size = new System.Drawing.Size(145, 17);
+            this.WorstCaseTime.Size = new System.Drawing.Size(123, 17);
             this.WorstCaseTime.TabIndex = 14;
-            this.WorstCaseTime.Text = "Worst Case Time (O):";
+            this.WorstCaseTime.Text = "Space Complexity:";
             // 
             // MainForm
             // 
@@ -249,8 +251,8 @@
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1582, 853);
             this.Controls.Add(this.WorstCaseTime);
-            this.Controls.Add(this.WorstCaseText);
-            this.Controls.Add(this.AverageCaseText);
+            this.Controls.Add(this.SpaceComplexityText);
+            this.Controls.Add(this.TimeComplexityText);
             this.Controls.Add(this.InfoBox);
             this.Controls.Add(this.AdjustSpeed);
             this.Controls.Add(this.AdjustElements);
@@ -260,7 +262,7 @@
             this.Controls.Add(this.SelectAlgorithm);
             this.Controls.Add(this.SortingSpeed);
             this.Controls.Add(this.NumberofElements);
-            this.Controls.Add(this.AverageCaseTime);
+            this.Controls.Add(this.TimeComplexity);
             this.Controls.Add(this.SelectedAlgorithm);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -269,6 +271,7 @@
             this.MaximumSize = new System.Drawing.Size(1600, 900);
             this.MinimumSize = new System.Drawing.Size(1600, 900);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visualize Sorting Algorithms";
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.BarChartBox)).EndInit();
@@ -285,7 +288,7 @@
         private System.Windows.Forms.Label SelectedAlgorithm;
         private System.Windows.Forms.Label NumberofElements;
         private System.Windows.Forms.Label SortingSpeed;
-        private System.Windows.Forms.Label AverageCaseTime;
+        private System.Windows.Forms.Label TimeComplexity;
         private System.Windows.Forms.ComboBox SelectAlgorithm;
         private System.Windows.Forms.PictureBox BarChartBox;
         private System.Windows.Forms.Button Shuffle;
@@ -293,8 +296,8 @@
         private System.Windows.Forms.NumericUpDown AdjustElements;
         private System.Windows.Forms.NumericUpDown AdjustSpeed;
         private System.Windows.Forms.PictureBox InfoBox;
-        private System.Windows.Forms.TextBox AverageCaseText;
-        private System.Windows.Forms.TextBox WorstCaseText;
+        private System.Windows.Forms.TextBox TimeComplexityText;
+        private System.Windows.Forms.TextBox SpaceComplexityText;
         private System.Windows.Forms.Label WorstCaseTime;
     }
 }
