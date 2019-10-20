@@ -42,6 +42,7 @@
             this.TimeComplexityText = new System.Windows.Forms.TextBox();
             this.SpaceComplexityText = new System.Windows.Forms.TextBox();
             this.WorstCaseTime = new System.Windows.Forms.Label();
+            this.bitmapBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.BarChartBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdjustElements)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdjustSpeed)).BeginInit();
@@ -90,12 +91,14 @@
             this.SelectAlgorithm.FormattingEnabled = true;
             this.SelectAlgorithm.Items.AddRange(new object[] {
             "Bubble Sort",
+            "Gnome Sort",
             "Insertion Sort",
             "Selection Sort"});
             this.SelectAlgorithm.Location = new System.Drawing.Point(210, 95);
             this.SelectAlgorithm.Margin = new System.Windows.Forms.Padding(0);
             this.SelectAlgorithm.Name = "SelectAlgorithm";
             this.SelectAlgorithm.Size = new System.Drawing.Size(120, 24);
+            this.SelectAlgorithm.Sorted = true;
             this.SelectAlgorithm.TabIndex = 5;
             this.SelectAlgorithm.SelectedIndexChanged += new System.EventHandler(this.SelectAlgorithm_SelectedIndexChanged);
             // 
@@ -244,6 +247,11 @@
             this.WorstCaseTime.TabIndex = 14;
             this.WorstCaseTime.Text = "Space Complexity:";
             // 
+            // bitmapBackgroundWorker
+            // 
+            this.bitmapBackgroundWorker.WorkerSupportsCancellation = true;
+            this.bitmapBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BitmapBackgroundWorker_DoWork);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -299,6 +307,7 @@
         private System.Windows.Forms.TextBox TimeComplexityText;
         private System.Windows.Forms.TextBox SpaceComplexityText;
         private System.Windows.Forms.Label WorstCaseTime;
+        private System.ComponentModel.BackgroundWorker bitmapBackgroundWorker;
     }
 }
 

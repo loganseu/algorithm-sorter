@@ -88,6 +88,24 @@ namespace SeeSortingAlgorithms
             }
         }
 
+        public void GnomeSort(List<int> numbers)
+        {
+            int i = 0;
+
+            while (i < numbers.Count)
+            {
+                if (i == 0)
+                    i++;
+                if (numbers[i] >= numbers[i - 1])
+                    i++;
+                else
+                {
+                    RecolorBars(numbers, i, i - 1);
+                    i--;
+                }
+            }
+        }
+
         public void InsertionSort(List<int> numbers)
         {
             for (int i = 0; i < numbers.Count - 1; i++)
@@ -102,7 +120,106 @@ namespace SeeSortingAlgorithms
             }
         }
 
-        public void SelectionSort(List<int> numbers)
+        public void MergeLists(List<int> numbers, int left, int middle, int right)
+        {
+            int i, j, k;
+            int n1 = middle - left + 1;
+            int n2 = right - middle;
+
+            List<int> R = new List<int>();
+            List<int> L = new List<int>();
+
+            for (i = 0; i < n1; i++)
+                L[i] = numbers[left + i];
+            for (j = 0; j < n2; j++)
+                R[j] = numbers[middle + 1 + j];
+
+            i = j = 0; 
+            k = left; 
+
+            while (i < n1 && j < n2)
+            {
+                if (L[i] <= R[j])
+                {
+                    numbers[k] = L[i];
+                    i++;
+                }
+                else
+                {
+                    numbers[k] = R[j];
+                    j++;
+                }
+                k++;
+            }
+
+            while (i < n1)
+            {
+                numbers[k] = L[i];
+                i++;
+                k++;
+            }
+
+            while (j < n2)
+            {
+                numbers[k] = R[j];
+                j++;
+                k++;
+            }
+        }
+
+        public void MergeSort(List<int> numbers, int left, int right)
+        {
+            if (left < right)
+            {
+                int middle = left + (right - left) / 2;
+
+                MergeSort(numbers, left, middle);
+                RecolorBars(numbers, left, middle);
+                MergeSort(numbers, middle + 1, right);
+                RecolorBars(numbers, left, middle);
+
+                MergeLists(numbers, left, middle, right);
+                RecolorBars(numbers, left, right);
+
+            }
+        }
+
+
+
+        public void QuickSort(List<int> numbers, int firstIndex, int lastIndex)
+        {
+            int pivot = numbers[(firstIndex + (lastIndex - firstIndex) / 2)];
+            int left = firstIndex;
+            int right = lastIndex;
+            while (left <= right)
+            {
+                while (numbers[left] < pivot)
+                {
+                    left++;
+                }
+                while (numbers[right] > pivot)
+                {
+                    right--;
+                }
+                if (left <= right)
+                {
+                    RecolorBars(numbers, left, right);
+                    left++;
+                    right--;
+                }
+            }
+            if (firstIndex < right)
+            {
+                QuickSort(numbers, firstIndex, left - 1);
+            }
+            if (lastIndex > left)
+            {
+                QuickSort(numbers, right + 1, lastIndex);
+            }
+        }
+
+
+            public void SelectionSort(List<int> numbers)
         {
             int min = 0;
             int min_index = 0;
@@ -136,7 +253,6 @@ namespace SeeSortingAlgorithms
                 int y = (int)(((double)boxHeight / numbers.Count) * numbers[i]);
                 g.FillRectangle(Brushes.LimeGreen, x, boxHeight - y, offsetX, boxHeight);
                 BarChartBox.Refresh();
-                Thread.Sleep(20);
             }
 
             DrawBarChart(numbers);

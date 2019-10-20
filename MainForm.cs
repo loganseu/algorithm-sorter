@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Threading;
 
 namespace SeeSortingAlgorithms
 {
@@ -107,6 +106,12 @@ namespace SeeSortingAlgorithms
                     SpaceComplexityText.Text = "O(1)";
                     SpaceComplexityText.ForeColor = Color.LimeGreen;
                     break;
+                case "Gnome Sort":
+                    TimeComplexityText.Text = "O(n²)";
+                    TimeComplexityText.ForeColor = Color.Red;
+                    SpaceComplexityText.Text = "O(1)";
+                    SpaceComplexityText.ForeColor = Color.LimeGreen;
+                    break;
                 case "Insertion Sort":
                     TimeComplexityText.Text = "O(n²)";
                     TimeComplexityText.ForeColor = Color.Red;
@@ -129,41 +134,7 @@ namespace SeeSortingAlgorithms
 
         private void Sort_Click(object sender, EventArgs e)
         {
-            BarChart sortingAlgorithm = new BarChart(BarChartBox, speed, numberOfElements, numbers);
-
-            ThreadStart ts = delegate()
-            {
-                try
-                {
-                    switch (SelectAlgorithm.Text)
-                    {
-                        case "Bubble Sort":
-                            DisableControls();
-                            sortingAlgorithm.BubbleSort(numbers);
-                            break;
-
-                        case "Insertion Sort":
-                            DisableControls();
-                            sortingAlgorithm.InsertionSort(numbers);
-                            break;
-
-                        case "Selection Sort":
-                            DisableControls();
-                            sortingAlgorithm.SelectionSort(numbers);
-                            break;
-                    }
-
-                    EnableControls();
-                    sortingAlgorithm.Glissando(numbers);
-
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message);
-                }
-            };
-            Thread t = new Thread(ts);
-            t.Start();
+            bitmapBackgroundWorker.RunWorkerAsync();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -185,6 +156,36 @@ namespace SeeSortingAlgorithms
         private void AdjustElements_ValueChanged(object sender, EventArgs e)
         {
             CreateNewBarChart(false);
+        }
+
+        private void BitmapBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            BarChart sortingAlgorithm = new BarChart(BarChartBox, speed, numberOfElements, numbers);
+
+            switch (SelectAlgorithm.Text)
+            {
+                case "Bubble Sort":
+                    DisableControls();
+                    sortingAlgorithm.MergeSort(numbers, 0, numbers.Count - 1);
+                    break;
+
+                case "Gnome Sort":
+                    DisableControls();
+                    sortingAlgorithm.GnomeSort(numbers);
+                    break;
+
+                case "Insertion Sort":
+                    DisableControls();
+                    sortingAlgorithm.InsertionSort(numbers);
+                    break;
+
+                case "Selection Sort":
+                    DisableControls();
+                    sortingAlgorithm.SelectionSort(numbers);
+                    break;
+            }
+            sortingAlgorithm.Glissando(numbers);
+            EnableControls();
         }
     }
 }
