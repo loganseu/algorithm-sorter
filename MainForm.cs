@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SeeSortingAlgorithms
+namespace N_Squared
 {
     public partial class MainForm : Form
     {
-        Graphics g;
-        Bitmap bmp;
-        List<int> numbers;
-        public int numberOfElements { get; set; }
-        public int speed { get; set; }
-        public string sortingTime { get; set; }
+        public Graphics G { get; set; }
+        public Bitmap Graph { get; set; }
+        public List<int> Numbers { get; set; }
+        public int NumberOfElements { get; set; }
+        public int SortingSpeed { get; set; }
 
         public MainForm()
         {
             InitializeComponent();
-            SelectAlgorithm.SelectedIndex = 0;
-            CreateNewBarChart(false);
+            SelectedAlgorithm.SelectedIndex = 0;
+            GenerateBarGraph(false);
         }
 
         public List<int> SwapValues(List<int> numbers, int a, int b)
@@ -32,7 +31,7 @@ namespace SeeSortingAlgorithms
 
         public List<int> GenerateList(List<int> numbers)
         {
-            for (int i = 0; i < numberOfElements; ++i)
+            for (int i = 0; i < NumberOfElements; ++i)
             {
                 numbers.Add(i + 1);
             }
@@ -51,36 +50,42 @@ namespace SeeSortingAlgorithms
             return numbers;
         }
 
-        private void DrawBarChart(List<int> numbers)
+        private void DrawBarGraph(List<int> numbers)
         {
-            int boxWidth = BarChartBox.Width;
-            int boxHeight = BarChartBox.Height;
-            int offsetX = (int)Math.Ceiling(((double)boxWidth / numbers.Count));
+            int offsetX = (int)Math.Ceiling(((double)BlackBox.Width / numbers.Count));
 
             for (int i = 0; i < numbers.Count; ++i)
             {
                 int x = offsetX * i;
-                int y = (int)(((double)boxHeight / numbers.Count) * numbers[i]);
-                g.FillRectangle(Brushes.White, x, boxHeight - y, offsetX, boxHeight);
+                int y = (int)(((double)BlackBox.Height / numbers.Count) * numbers[i]);
+                G.FillRectangle(Brushes.White, x, BlackBox.Height - y, offsetX, BlackBox.Height);
             }
         }
 
-        private void CreateNewBarChart(bool shuffle)
+        private void GenerateBarGraph(bool shuffle)
         {
-            bmp = new Bitmap(BarChartBox.Width, BarChartBox.Height);
-            g = Graphics.FromImage(bmp);
-            BarChartBox.Image = bmp;
+            Graph = new Bitmap(BlackBox.Width, BlackBox.Height);
+            G = Graphics.FromImage(Graph);
+            BlackBox.Image = Graph;
 
-            numbers = new List<int>();
-            numberOfElements = (int)AdjustElements.Value;
+            Numbers = new List<int>();
+            NumberOfElements = (int)AdjustNumberOfElements.Value;
 
-            GenerateList(numbers);
+            GenerateList(Numbers);
             if (shuffle == true)
             {
-                ShuffleList(numbers);
+                ShuffleList(Numbers);
             }
 
-            DrawBarChart(numbers);
+            DrawBarGraph(Numbers);
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            Graph = new Bitmap(BlackBox.Width, BlackBox.Height);
+            G = Graphics.FromImage(Graph);
+            BlackBox.Image = Graph;
+            DrawBarGraph(Numbers);
         }
 
         private void DisableControls()
@@ -95,96 +100,156 @@ namespace SeeSortingAlgorithms
             Shuffle.Enabled = true;
         }
 
-
         private void SelectAlgorithm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (SelectAlgorithm.Text)
+            switch (SelectedAlgorithm.Text)
             {
                 case "Bubble Sort":
-                    TimeComplexityText.Text = "O(n²)";
-                    TimeComplexityText.ForeColor = Color.Red;
-                    SpaceComplexityText.Text = "O(1)";
-                    SpaceComplexityText.ForeColor = Color.LimeGreen;
+                    TimeComplexity.Text = "O(n²)";
+                    TimeComplexity.ForeColor = Color.Red;
+                    SpaceComplexity.Text = "O(1)";
+                    SpaceComplexity.ForeColor = Color.LimeGreen;
                     break;
+
+                case "Bucket Sort":
+                    TimeComplexity.Text = "O(n²)";
+                    TimeComplexity.ForeColor = Color.Red;
+                    SpaceComplexity.Text = "O(n + k)";
+                    SpaceComplexity.ForeColor = Color.Orange;
+                    break;
+
+                case "Cycle Sort":
+                    TimeComplexity.Text = "O(n²)";
+                    TimeComplexity.ForeColor = Color.Red;
+                    SpaceComplexity.Text = "O(1)";
+                    SpaceComplexity.ForeColor = Color.LimeGreen;
+                    break;
+
                 case "Gnome Sort":
-                    TimeComplexityText.Text = "O(n²)";
-                    TimeComplexityText.ForeColor = Color.Red;
-                    SpaceComplexityText.Text = "O(1)";
-                    SpaceComplexityText.ForeColor = Color.LimeGreen;
+                    TimeComplexity.Text = "O(n²)";
+                    TimeComplexity.ForeColor = Color.Red;
+                    SpaceComplexity.Text = "O(1)";
+                    SpaceComplexity.ForeColor = Color.LimeGreen;
                     break;
+
                 case "Insertion Sort":
-                    TimeComplexityText.Text = "O(n²)";
-                    TimeComplexityText.ForeColor = Color.Red;
-                    SpaceComplexityText.Text = "O(1)";
-                    SpaceComplexityText.ForeColor = Color.LimeGreen;
+                    TimeComplexity.Text = "O(n²)";
+                    TimeComplexity.ForeColor = Color.Red;
+                    SpaceComplexity.Text = "O(1)";
+                    SpaceComplexity.ForeColor = Color.LimeGreen;
                     break;
+
+                case "Merge Sort":
+                    TimeComplexity.Text = "O(n * log(n))";
+                    TimeComplexity.ForeColor = Color.Orange;
+                    SpaceComplexity.Text = "O(n)";
+                    SpaceComplexity.ForeColor = Color.LightYellow;
+                    break;
+
+                case "Quick Sort":
+                    TimeComplexity.Text = "O(n²)";
+                    TimeComplexity.ForeColor = Color.Red;
+                    SpaceComplexity.Text = "O(log(n))";
+                    SpaceComplexity.ForeColor = Color.Yellow;
+                    break;
+
+                case "Radix Sort":
+                    TimeComplexity.Text = "O(n * k/d)";
+                    TimeComplexity.ForeColor = Color.Red;
+                    SpaceComplexity.Text = "O(n + 2^d)";
+                    SpaceComplexity.ForeColor = Color.Red;
+                    break;
+
                 case "Selection Sort":
-                    TimeComplexityText.Text = "O(n²)";
-                    TimeComplexityText.ForeColor = Color.Red;
-                    SpaceComplexityText.Text = "O(1)";
-                    SpaceComplexityText.ForeColor = Color.LimeGreen;
+                    TimeComplexity.Text = "O(n²)";
+                    TimeComplexity.ForeColor = Color.Red;
+                    SpaceComplexity.Text = "O(1)";
+                    SpaceComplexity.ForeColor = Color.LimeGreen;
                     break;
+
+                case "Shell Sort":
+                    TimeComplexity.Text = "O(n * log²(n))";
+                    TimeComplexity.ForeColor = Color.Red;
+                    SpaceComplexity.Text = "O(n)";
+                    SpaceComplexity.ForeColor = Color.LightYellow;
+                    break;
+
             }
+        }
+
+        private void AdjustSortingSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            SortingSpeed = (int)AdjustSortingSpeed.Value;
+        }
+
+        private void AdjustNumberOfElements_ValueChanged(object sender, EventArgs e)
+        {
+            GenerateBarGraph(false);
         }
 
         private void Shuffle_Click(object sender, EventArgs e)
         {
-            CreateNewBarChart(true);
+            GenerateBarGraph(true);
         }
 
         private void Sort_Click(object sender, EventArgs e)
         {
-            bitmapBackgroundWorker.RunWorkerAsync();
+            blackBoxBW.RunWorkerAsync();
         }
 
-        private void MainForm_Resize(object sender, EventArgs e)
+        private void BlackBoxBackgroundWorker(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            bmp = new Bitmap(BarChartBox.Width, BarChartBox.Height);
-            g = Graphics.FromImage(bmp);
-            BarChartBox.Image = bmp;
-            DrawBarChart(numbers);
-        }
+            BarGraph sortingAlgorithm = new BarGraph(BlackBox, SortingSpeed, NumberOfElements, Numbers);
+            DisableControls();
 
-        private void AdjustSpeed_ValueChanged(object sender, EventArgs e)
-        {
-            if (AdjustSpeed.Value % 10 == 0)
-            {
-                speed = (int)Math.Round(AdjustSpeed.Value, 0);
-            }
-        }
-
-        private void AdjustElements_ValueChanged(object sender, EventArgs e)
-        {
-            CreateNewBarChart(false);
-        }
-
-        private void BitmapBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            BarChart sortingAlgorithm = new BarChart(BarChartBox, speed, numberOfElements, numbers);
-
-            switch (SelectAlgorithm.Text)
+            switch (SelectedAlgorithm.Text)
             {
                 case "Bubble Sort":
-                    DisableControls();
-                    sortingAlgorithm.MergeSort(numbers, 0, numbers.Count - 1);
+                    sortingAlgorithm.BubbleSort(Numbers);
+                    break;
+
+                case "Bucket Sort":
+                    sortingAlgorithm.BucketSort(Numbers);
+                    break;
+
+                case "Cycle Sort":
+                    sortingAlgorithm.CycleSort(Numbers);
                     break;
 
                 case "Gnome Sort":
-                    DisableControls();
-                    sortingAlgorithm.GnomeSort(numbers);
+                    sortingAlgorithm.GnomeSort(Numbers);
                     break;
 
                 case "Insertion Sort":
-                    DisableControls();
-                    sortingAlgorithm.InsertionSort(numbers);
+                    sortingAlgorithm.InsertionSort(Numbers);
+                    break;
+
+                case "Merge Sort":
+                    sortingAlgorithm.MergeSort(Numbers, 0, Numbers.Count - 1);
+                    break;
+
+                case "Quick Sort":
+                    sortingAlgorithm.QuickSort(Numbers, 0, Numbers.Count - 1);
+                    break;
+
+                case "Radix Sort":
+                    sortingAlgorithm.RadixSort(Numbers);
                     break;
 
                 case "Selection Sort":
-                    DisableControls();
-                    sortingAlgorithm.SelectionSort(numbers);
+                    sortingAlgorithm.SelectionSort(Numbers);
                     break;
+
+                case "Shell Sort":
+                    sortingAlgorithm.ShellSort(Numbers);
+                    break;
+                default:
+                    MessageBox.Show("This sorting algorithm does not exist or has not yet been implemented. Please try another one.", "Algorithm Not Found",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    EnableControls();
+                    return;
             }
-            sortingAlgorithm.Glissando(numbers);
+            sortingAlgorithm.Glissando(Numbers);
             EnableControls();
         }
     }

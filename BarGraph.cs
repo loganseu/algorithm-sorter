@@ -1,43 +1,40 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Drawing;
 using System.Windows.Forms;
-using System.ComponentModel;
 using System.Threading;
 
-namespace SeeSortingAlgorithms
+namespace N_Squared
 {
-    public class BarChart
+    public class BarGraph
     {
-        Graphics g;
-        Bitmap bmp;
-        public int numberOfElements { get; set; }
-        public int sortingSpeed { get; set; }
-        PictureBox BarChartBox;
+        readonly Graphics G;
+        readonly Bitmap Graph;
+        readonly PictureBox BlackBox;
+        public int NumberOfElements { get; set; }
+        public int SortingSpeed { get; set; }
 
-        public BarChart(PictureBox p, int speed, int elements, List<int> numbers)
+        public BarGraph(PictureBox p, int speed, int elements, List<int> numbers)
         {
-            bmp = new Bitmap(p.Width, p.Height);
-            g = Graphics.FromImage(bmp);
-            BarChartBox = p;
-            BarChartBox.Image = bmp;
-            sortingSpeed = speed;
-            numberOfElements = elements;
+            Graph = new Bitmap(p.Width, p.Height);
+            G = Graphics.FromImage(Graph);
+            SortingSpeed = speed;
+            BlackBox = p;
+            BlackBox.Image = Graph;
+            NumberOfElements = elements;
             DrawBarChart(numbers);
         }
 
         public void DrawBarChart(List<int> numbers)
         {
-            int boxWidth = BarChartBox.Width;
-            int boxHeight = BarChartBox.Height;
-            int offsetX = (int)Math.Ceiling((double)boxWidth / numbers.Count);
+            int offsetX = (int)Math.Ceiling((double)BlackBox.Width / numbers.Count);
 
             for (int i = 0; i < numbers.Count; ++i)
             {
                 int x = offsetX * i;
-                int y = (int)(((double)boxHeight / numbers.Count) * numbers[i]);
-                g.FillRectangle(Brushes.White, x, boxHeight - y, offsetX, boxHeight);
+                int y = (int)(((double)BlackBox.Height / numbers.Count) * numbers[i]);
+                G.FillRectangle(Brushes.White, x, BlackBox.Height - y, offsetX, BlackBox.Height);
             }
         }
 
@@ -53,25 +50,22 @@ namespace SeeSortingAlgorithms
         public void RecolorBars(List<int> numbers, int i, int j)
         {
             RedrawBar(i, numbers, Brushes.Red);
-            RedrawBar(j, numbers, Brushes.LimeGreen);
+            RedrawBar(j, numbers, Brushes.Red);
             SwapValues(numbers, i, j);
-            BarChartBox.Refresh();
-            Thread.Sleep(sortingSpeed);
+            BlackBox.Refresh();
+            Thread.Sleep(SortingSpeed);
             RedrawBar(i, numbers, Brushes.White);
             RedrawBar(j, numbers, Brushes.White);
-            BarChartBox.Refresh();
+            BlackBox.Refresh();
         }
 
         private void RedrawBar(int index, List<int> numbers, Brush color)
         {
-            int boxWidth = BarChartBox.Width;
-            int boxHeight = BarChartBox.Height;
-
-            int x = (int)(((double)boxWidth / numbers.Count) * index);
-            int y = (int)(((double)boxHeight / numbers.Count) * numbers[index]);
-            int offsetX = (int)Math.Ceiling(((double)boxWidth / numbers.Count));
-            g.FillRectangle(Brushes.Black, x, 0, offsetX, boxHeight);
-            g.FillRectangle(color, x, boxHeight - y, offsetX, boxHeight);
+            int x = (int)(((double)BlackBox.Width / numbers.Count) * index);
+            int y = (int)(((double)BlackBox.Height / numbers.Count) * numbers[index]);
+            int offsetX = (int)Math.Ceiling(((double)BlackBox.Width / numbers.Count));
+            G.FillRectangle(Brushes.Black, x, 0, offsetX, BlackBox.Height);
+            G.FillRectangle(color, x, BlackBox.Height - y, offsetX, BlackBox.Height);
         }
 
         public void BubbleSort(List<int> numbers)
@@ -86,6 +80,16 @@ namespace SeeSortingAlgorithms
                     }
                 }
             }
+        }
+
+        public void BucketSort(List<int> numbers)
+        {
+
+        }
+
+        public void CycleSort(List<int> numbers)
+        {
+
         }
 
         public void GnomeSort(List<int> numbers)
@@ -120,71 +124,46 @@ namespace SeeSortingAlgorithms
             }
         }
 
-        public void MergeLists(List<int> numbers, int left, int middle, int right)
+        public void MergeSort(List<int> numbers, int left, int right)
         {
-            int i, j, k;
-            int n1 = middle - left + 1;
-            int n2 = right - middle;
+            int l = left;
+            int r = right;
 
-            List<int> R = new List<int>();
-            List<int> L = new List<int>();
-
-            for (i = 0; i < n1; i++)
-                L[i] = numbers[left + i];
-            for (j = 0; j < n2; j++)
-                R[j] = numbers[middle + 1 + j];
-
-            i = j = 0; 
-            k = left; 
-
-            while (i < n1 && j < n2)
+            if (l == r)
             {
-                if (L[i] <= R[j])
+                return;
+            }
+
+            int mid = (l + r) / 2;
+
+            MergeSort(numbers, l, mid);
+            MergeSort(numbers, mid + 1, r);
+
+            int lastIndexLeft = mid;
+            int firstIndexRight = mid + 1;
+            while ((l <= lastIndexLeft) && (firstIndexRight <= r))
+            {
+                if ((numbers[l]) <= (numbers[firstIndexRight]))
                 {
-                    numbers[k] = L[i];
-                    i++;
+                    l++;
                 }
                 else
                 {
-                    numbers[k] = R[j];
-                    j++;
+                    var temp = numbers[firstIndexRight];
+                    for (int k = firstIndexRight - 1; k >= l; k--)
+                    {
+                        numbers[k + 1] = numbers[k];
+                        RecolorBars(numbers, k + 1, k + 1);
+                    }
+                    numbers[l] = temp;
+                    RecolorBars(numbers, l, l);
+                    l++;
+                    lastIndexLeft++;
+                    firstIndexRight++;
                 }
-                k++;
             }
-
-            while (i < n1)
-            {
-                numbers[k] = L[i];
-                i++;
-                k++;
-            }
-
-            while (j < n2)
-            {
-                numbers[k] = R[j];
-                j++;
-                k++;
-            }
+            return;
         }
-
-        public void MergeSort(List<int> numbers, int left, int right)
-        {
-            if (left < right)
-            {
-                int middle = left + (right - left) / 2;
-
-                MergeSort(numbers, left, middle);
-                RecolorBars(numbers, left, middle);
-                MergeSort(numbers, middle + 1, right);
-                RecolorBars(numbers, left, middle);
-
-                MergeLists(numbers, left, middle, right);
-                RecolorBars(numbers, left, right);
-
-            }
-        }
-
-
 
         public void QuickSort(List<int> numbers, int firstIndex, int lastIndex)
         {
@@ -218,8 +197,12 @@ namespace SeeSortingAlgorithms
             }
         }
 
+        public void RadixSort(List<int> numbers)
+        {
+           
+        }
 
-            public void SelectionSort(List<int> numbers)
+        public void SelectionSort(List<int> numbers)
         {
             int min = 0;
             int min_index = 0;
@@ -240,23 +223,40 @@ namespace SeeSortingAlgorithms
             }
         }
 
+        public void ShellSort(List<int> numbers)
+        {
+            for (int gap = numbers.Count / 2; gap > 0; gap /= 2)
+            {
+                for (int i = gap; i < numbers.Count; i += 1)
+                {
+                    int temp = numbers[i];
+                    int j;
+                    for (j = i; j >= gap && numbers[j - gap] > temp; j -= gap)
+                    {
+                        numbers[j] = numbers[j - gap];
+                        RecolorBars(numbers, j, j);
+                    }
+                    numbers[j] = temp;
+                    RecolorBars(numbers, j, j);
+                }
+            }
+        }
+
         //Named after the piano technique where you run your hand across the keyboard.
         public void Glissando(List<int> numbers)
         {
-            int boxWidth = BarChartBox.Width;
-            int boxHeight = BarChartBox.Height;
-            int offsetX = (int)Math.Ceiling((double)boxWidth / numbers.Count);
+            int offsetX = (int)Math.Ceiling((double)BlackBox.Width / numbers.Count);
 
             for (int i = 0; i < numbers.Count; ++i)
             {
                 int x = offsetX * i;
-                int y = (int)(((double)boxHeight / numbers.Count) * numbers[i]);
-                g.FillRectangle(Brushes.LimeGreen, x, boxHeight - y, offsetX, boxHeight);
-                BarChartBox.Refresh();
+                int y = (int)(((double)BlackBox.Height / numbers.Count) * numbers[i]);
+                G.FillRectangle(Brushes.LimeGreen, x, BlackBox.Height - y, offsetX, BlackBox.Height);
+                BlackBox.Refresh();
             }
 
             DrawBarChart(numbers);
-            BarChartBox.Refresh();
+            BlackBox.Refresh();
         }
     }
 }

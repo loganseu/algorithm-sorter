@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SeeSortingAlgorithms.Properties
+namespace N_Squared.Properties
 {
 
 
