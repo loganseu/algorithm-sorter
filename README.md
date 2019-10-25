@@ -1,2 +1,2 @@
-# N_Squared
- Allow users to visualize sorting algorithms
+# N_Squared 
+Allow users to visualize sorting algorithms
