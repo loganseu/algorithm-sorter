@@ -91,13 +91,11 @@
             this.SelectedAlgorithm.FormattingEnabled = true;
             this.SelectedAlgorithm.Items.AddRange(new object[] {
             "Bubble Sort",
-            "Bucket Sort",
             "Cycle Sort",
             "Gnome Sort",
             "Insertion Sort",
             "Merge Sort",
             "Quick Sort",
-            "Radix Sort",
             "Selection Sort",
             "Shell Sort"});
             this.SelectedAlgorithm.Location = new System.Drawing.Point(210, 95);
