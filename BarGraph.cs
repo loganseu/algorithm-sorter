@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -70,9 +69,9 @@ namespace N_Squared
 
         public void BubbleSort(List<int> numbers)
         {
-            for (int i = 0; i < numbers.Count; ++i)
+            for (int i = 0; i < numbers.Count; i++)
             {
-                for (int j = 0; j < numbers.Count - 1; ++j)
+                for (int j = 0; j < numbers.Count - 1; j++)
                 {
                     if (numbers[j] > numbers[j + 1])
                     {
@@ -82,14 +81,41 @@ namespace N_Squared
             }
         }
 
-        public void BucketSort(List<int> numbers)
-        {
-
-        }
-
         public void CycleSort(List<int> numbers)
         {
+            int writes = 0;
+            for (int cycleStart = 0; cycleStart < numbers.Count; cycleStart++)
+            {
+                int item = numbers[cycleStart];
+                int position = cycleStart;
 
+                do
+                {
+                    int next = 0;
+                    for (int i = 0; i < numbers.Count; i++)
+                    {
+                        if (i != cycleStart && numbers[i] < item)
+                        {
+                            next++;
+                        }
+                    }
+                    if (position != next)
+                    {
+                        while (position != next && numbers[next] == item)
+                        {
+                            next++;
+                        }
+
+                        int temp = numbers[next];
+                        numbers[next] = item;
+                        RecolorBars(numbers, next, next);
+                        item = temp;
+                        RecolorBars(numbers, cycleStart, cycleStart);
+                        writes++;
+                        position = next;
+                    }
+                } while (cycleStart != position);
+            }
         }
 
         public void GnomeSort(List<int> numbers)
@@ -197,18 +223,13 @@ namespace N_Squared
             }
         }
 
-        public void RadixSort(List<int> numbers)
-        {
-           
-        }
-
         public void SelectionSort(List<int> numbers)
         {
             int min = 0;
             int min_index = 0;
-            for (int i = 0; i < numbers.Count; ++i)
+            for (int i = 0; i < numbers.Count; i++)
             {
-                for (int j = i; j < numbers.Count; ++j)
+                for (int j = i; j < numbers.Count; j++)
                 {
                     if (j == i || numbers[j] < min)
                     {
@@ -247,12 +268,29 @@ namespace N_Squared
         {
             int offsetX = (int)Math.Ceiling((double)BlackBox.Width / numbers.Count);
 
-            for (int i = 0; i < numbers.Count; ++i)
+            for (int i = 0; i < numbers.Count; i++)
             {
                 int x = offsetX * i;
                 int y = (int)(((double)BlackBox.Height / numbers.Count) * numbers[i]);
                 G.FillRectangle(Brushes.LimeGreen, x, BlackBox.Height - y, offsetX, BlackBox.Height);
                 BlackBox.Refresh();
+                switch(NumberOfElements)
+                {
+                    case int delay when NumberOfElements == 10:
+                        Thread.Sleep(20);
+                        break;
+                    case int delay when NumberOfElements == 15:
+                        Thread.Sleep(10);
+                        break;
+                    case int delay when NumberOfElements < 30:
+                        Thread.Sleep(5);
+                        break;
+                    case int delay when NumberOfElements <= 60:
+                        Thread.Sleep(2);
+                        break;
+                    default:
+                        break;
+                }
             }
 
             DrawBarChart(numbers);

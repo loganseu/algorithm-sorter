@@ -111,13 +111,6 @@ namespace N_Squared
                     SpaceComplexity.ForeColor = Color.LimeGreen;
                     break;
 
-                case "Bucket Sort":
-                    TimeComplexity.Text = "O(n²)";
-                    TimeComplexity.ForeColor = Color.Red;
-                    SpaceComplexity.Text = "O(n + k)";
-                    SpaceComplexity.ForeColor = Color.Orange;
-                    break;
-
                 case "Cycle Sort":
                     TimeComplexity.Text = "O(n²)";
                     TimeComplexity.ForeColor = Color.Red;
@@ -153,13 +146,6 @@ namespace N_Squared
                     SpaceComplexity.ForeColor = Color.Yellow;
                     break;
 
-                case "Radix Sort":
-                    TimeComplexity.Text = "O(n * k/d)";
-                    TimeComplexity.ForeColor = Color.Red;
-                    SpaceComplexity.Text = "O(n + 2^d)";
-                    SpaceComplexity.ForeColor = Color.Red;
-                    break;
-
                 case "Selection Sort":
                     TimeComplexity.Text = "O(n²)";
                     TimeComplexity.ForeColor = Color.Red;
@@ -173,7 +159,6 @@ namespace N_Squared
                     SpaceComplexity.Text = "O(n)";
                     SpaceComplexity.ForeColor = Color.LightYellow;
                     break;
-
             }
         }
 
@@ -208,10 +193,6 @@ namespace N_Squared
                     sortingAlgorithm.BubbleSort(Numbers);
                     break;
 
-                case "Bucket Sort":
-                    sortingAlgorithm.BucketSort(Numbers);
-                    break;
-
                 case "Cycle Sort":
                     sortingAlgorithm.CycleSort(Numbers);
                     break;
@@ -230,10 +211,6 @@ namespace N_Squared
 
                 case "Quick Sort":
                     sortingAlgorithm.QuickSort(Numbers, 0, Numbers.Count - 1);
-                    break;
-
-                case "Radix Sort":
-                    sortingAlgorithm.RadixSort(Numbers);
                     break;
 
                 case "Selection Sort":
