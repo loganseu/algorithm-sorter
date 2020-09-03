@@ -51,11 +51,13 @@ namespace N_Squared
             RedrawBar(i, numbers, Brushes.Red);
             RedrawBar(j, numbers, Brushes.Red);
             SwapValues(numbers, i, j);
-            BlackBox.Refresh();
+
+            BlackBox.Invoke(new MethodInvoker(delegate { BlackBox.Refresh(); }));
+
             Thread.Sleep(SortingSpeed);
             RedrawBar(i, numbers, Brushes.White);
             RedrawBar(j, numbers, Brushes.White);
-            BlackBox.Refresh();
+            BlackBox.Invoke(new MethodInvoker(delegate { BlackBox.Refresh(); }));
         }
 
         private void RedrawBar(int index, List<int> numbers, Brush color)
@@ -273,8 +275,8 @@ namespace N_Squared
                 int x = offsetX * i;
                 int y = (int)(((double)BlackBox.Height / numbers.Count) * numbers[i]);
                 G.FillRectangle(Brushes.LimeGreen, x, BlackBox.Height - y, offsetX, BlackBox.Height);
-                BlackBox.Refresh();
-                switch(NumberOfElements)
+                BlackBox.Invoke(new MethodInvoker(delegate { BlackBox.Refresh(); }));
+                switch (NumberOfElements)
                 {
                     case int delay when NumberOfElements == 10:
                         Thread.Sleep(20);
@@ -294,7 +296,7 @@ namespace N_Squared
             }
 
             DrawBarChart(numbers);
-            BlackBox.Refresh();
+            BlackBox.Invoke(new MethodInvoker(delegate { BlackBox.Refresh(); }));
         }
     }
 }

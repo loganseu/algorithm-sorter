@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F78063AB-75EC-4EE8-AEC6-6EC992CFDCAF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SeeSortingAlgorithms</RootNamespace>
-    <AssemblyName>SeeSortingAlgorithms</AssemblyName>
+    <RootNamespace>N_Squared</RootNamespace>
+    <AssemblyName>N_Squared</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -85,19 +85,21 @@ namespace N_Squared
             Graph = new Bitmap(BlackBox.Width, BlackBox.Height);
             G = Graphics.FromImage(Graph);
             BlackBox.Image = Graph;
+            Numbers = new List<int>();
+            GenerateList(Numbers);
             DrawBarGraph(Numbers);
         }
 
         private void DisableControls()
         {
-            Sort.Enabled = false;
-            Shuffle.Enabled = false;
+            Sort.Invoke(new MethodInvoker(delegate { Sort.Enabled = false; }));
+            Shuffle.Invoke(new MethodInvoker(delegate { Shuffle.Enabled = false; }));
         }
 
         private void EnableControls()
         {
-            Sort.Enabled = true;
-            Shuffle.Enabled = true;
+            Sort.Invoke(new MethodInvoker(delegate { Sort.Enabled = true; }));
+            Shuffle.Invoke(new MethodInvoker(delegate { Shuffle.Enabled = true; }));
         }
 
         private void SelectAlgorithm_SelectedIndexChanged(object sender, EventArgs e)
@@ -186,8 +188,10 @@ namespace N_Squared
         {
             BarGraph sortingAlgorithm = new BarGraph(BlackBox, SortingSpeed, NumberOfElements, Numbers);
             DisableControls();
+            string currentAlgorithm = "";
+            Sort.Invoke(new MethodInvoker(delegate { currentAlgorithm = SelectedAlgorithm.Text; }));
 
-            switch (SelectedAlgorithm.Text)
+            switch (currentAlgorithm)
             {
                 case "Bubble Sort":
                     sortingAlgorithm.BubbleSort(Numbers);
