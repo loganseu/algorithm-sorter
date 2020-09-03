@@ -20,7 +20,7 @@ This application was built in a Windows environment using Visual Studio and .Net
 
 ### Installation
 
-1. If you haven't already installed Visual Studio, you can download it for free here: [https://visualstudio.microsoft.com/downloads](https://visualstudio.microsoft.com/downloads)
+1. If you haven't already installed Visual Studio, you can download it for free [here](https://visualstudio.microsoft.com/downloads)
 2. Clone the repository using your method of choice; I typically use Git Bash.
 ```
 git clone https://github.com/loganseu/N_Squared.git
